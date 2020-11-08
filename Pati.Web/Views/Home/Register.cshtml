@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form class="shadow my-3 p-4" method="post" asp-action="Login">
+    <h3 class="mb-3">Kayıt Ol</h3>
+
+    <div class="form-group">
+        @*<span asp-validation-for=""></span>*@
+        <label>E-Posta:</label>
+        <input type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        @*<span asp-validation-for=""></span>*@
+        <label>Ad Soyad:</label>
+        <input type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        @*<span asp-validation-for=""></span>*@
+        <label>Şifre:</label>
+        <input type="password" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        @*<span asp-validation-for=""></span>*@
+        <label>Şifre Tekrar:</label>
+        <input type="password" class="form-control" />
+    </div>
+
+    <div>Hesabınız var mı? <a asp-action="Login">Giriş yap!</a></div>
+
+    <div class="mt-2">
+        <a class="btn btn-warning"> Geri Git</a>
+        <button type="submit" class="btn btn-success">Kayıt Ol</button>
+    </div>
+</form>
+
+
