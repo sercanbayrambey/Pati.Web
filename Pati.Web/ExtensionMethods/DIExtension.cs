@@ -20,6 +20,7 @@ namespace Pati.Web.ExtensionMethods
             services.AddHttpClient<IRoleApiService, RoleApiManager>();
             services.AddHttpClient<IShelterApiService, ShelterApiManager>();
             services.AddHttpClient<IUserApiService, UserApiManager>();
+            services.AddHttpClient<IAuthService, AuthManager>();
 
         }
     }

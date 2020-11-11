@@ -26,6 +26,8 @@ namespace Pati.Web
         {
             services.AddControllersWithViews();
             services.AddDIScopes();
+            services.AddSession();
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
