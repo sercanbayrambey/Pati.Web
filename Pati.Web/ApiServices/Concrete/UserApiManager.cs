@@ -13,6 +13,10 @@ namespace Pati.Web.ApiServices.Concrete
         public UserApiManager(HttpClient httpClient)
         {
             _httpClient = httpClient;
+
+            _httpClient.BaseAddress = new Uri("localhost...");
         }
+
+
     }
 }
