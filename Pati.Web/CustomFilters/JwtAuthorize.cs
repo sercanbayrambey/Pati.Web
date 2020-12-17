@@ -34,7 +34,6 @@ namespace Pati.Web.CustomFilters
             
             if(responseMessage.StatusCode == HttpStatusCode.OK)
             {
-
                 //Todo: Add user object
                 var activeUser = JsonConvert.DeserializeObject<dynamic>(responseMessage.Content.ReadAsStringAsync().Result);
 
