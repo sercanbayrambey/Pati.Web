@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
+using Pati.Web.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,6 @@ namespace Pati.Web.CustomFilters
     public class JwtAuthorize : ActionFilterAttribute
     {
         public string Roles { get; set; }
-
-
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             var token = context.HttpContext.Session.GetString("token");
@@ -35,7 +34,7 @@ namespace Pati.Web.CustomFilters
             if(responseMessage.StatusCode == HttpStatusCode.OK)
             {
                 //Todo: Add user object
-                var activeUser = JsonConvert.DeserializeObject<dynamic>(responseMessage.Content.ReadAsStringAsync().Result);
+                var activeUser = JsonConvert.DeserializeObject<UserDto>(responseMessage.Content.ReadAsStringAsync().Result);
 
                 if (!string.IsNullOrWhiteSpace(Roles))
                 {
@@ -45,7 +44,7 @@ namespace Pati.Web.CustomFilters
                         var acceptedRoles = Roles.Split(",");
                         foreach (var role in acceptedRoles)
                         {
-                            if (activeUser.Role.Equals(role))
+                            if (activeUser.Role.ToLower().Equals(role.ToLower()))
                             {
                                 canAccess = true;
                                 break;

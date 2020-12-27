@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using Pati.Data.Dtos;
 using Pati.Web.ApiServices.Interfaces;
 using Pati.Web.Models;
 using System;
@@ -23,9 +22,9 @@ namespace Pati.Web.ApiServices.Concrete
 
             httpClient.BaseAddress = new Uri("URL");
         }
-        public async Task<bool> SignInAsync(UserLoginDto userLoginDto)
+        public async Task<bool> SignInAsync(UserLoginModel userLoginModel)
         {
-            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(userLoginDto), Encoding.UTF8);
+            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(userLoginModel), Encoding.UTF8);
             var response = await _httpClient.PostAsync("", stringContent);
 
             if (response.IsSuccessStatusCode)
