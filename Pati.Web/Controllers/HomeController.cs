@@ -5,17 +5,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Pati.Data.Dtos;
+using Pati.Web.ApiServices.Interfaces;
 using Pati.Web.Models;
 
 namespace Pati.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IAuthService _authService;
+        public HomeController(ILogger<HomeController> logger, IAuthService authService)
         {
-            _logger = logger;
+            _authService = authService;
         }
 
         public IActionResult Index()
@@ -23,11 +24,12 @@ namespace Pati.Web.Controllers
             return View();
         }
 
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         {
-
+            await _authService.SignInAsync(new UserLoginDto { Username = "Test", Password = "malgokay" });
             return View();
         }
+
 
         public IActionResult Register()
         {

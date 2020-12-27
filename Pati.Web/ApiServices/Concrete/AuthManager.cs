@@ -3,10 +3,12 @@ using Newtonsoft.Json;
 using Pati.Data.Dtos;
 using Pati.Web.ApiServices.Interfaces;
 using Pati.Web.Models;
+using Pati.Web.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,12 +23,13 @@ namespace Pati.Web.ApiServices.Concrete
             _httpClient = httpClient;
             _httpContextAccessor = httpContextAccessor;
 
-            httpClient.BaseAddress = new Uri("URL");
+            httpClient.BaseAddress = new Uri("http://localhost");
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(ContentTypes.JSON));
         }
         public async Task<bool> SignInAsync(UserLoginDto userLoginDto)
         {
-            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(userLoginDto), Encoding.UTF8);
-            var response = await _httpClient.PostAsync("", stringContent);
+            StringContent stringContent = new StringContent(JsonConvert.SerializeObject(userLoginDto), Encoding.UTF8, ContentTypes.JSON);
+            var response = await _httpClient.PostAsync("login", stringContent);
 
             if (response.IsSuccessStatusCode)
             {
