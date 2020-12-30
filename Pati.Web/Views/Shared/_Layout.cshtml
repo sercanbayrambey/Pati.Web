@@ -12,7 +12,7 @@
 
 <body>
     <header>
-        <nav class="navbar  navbar-expand-lg ">
+        <nav class="navbar  navbar-expand-lg shadow-lg">
             <a class="navbar-brand" href="#"><i class="fas fa-paw mr-2"></i>Pati</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars text-white"></i>
@@ -32,15 +32,15 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-action="Register">Kayıt Ol</a>
                     </li>
-                    
-                    
+
+
                 </ul>
-            
+
             </div>
         </nav>
     </header>
 
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

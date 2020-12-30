@@ -26,7 +26,6 @@ namespace Pati.Web.Controllers
 
         public async Task<IActionResult> Login()
         {
-            await _authService.SignInAsync(new UserLoginDto { Username = "Test", Password = "malgokay" });
             return View();
         }
 

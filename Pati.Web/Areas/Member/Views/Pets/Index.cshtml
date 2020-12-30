@@ -1,13 +1,234 @@
 ﻿
 @{
-
-    ///
-    /// Browse Pets
-    /// 
-
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<div class="row">
+    <!--Filtre Bölümü-->
+    <div class="col-md-3 filter-row">
+        <!--Arama Çubuğu-->
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Arama Yap" aria-label="Arama Yap" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button">Ara</button>
+            </div>
+        </div>
+
+        <!--Akordiyon Filtreleme-->
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button type="button" class="btn btn-link" data-toggle="collapse" id="collapseFilter" data-target="#collapseOne"><i class="fa fa-plus"></i> CİNSLER</button>
+                    </h2>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="form-check border-bottom p-1 ml-2">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Kedi
+                            </label>
+                        </div>
+                        <div class="form-check  border-bottom p-1 ml-2">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Köpek
+                            </label>
+                        </div>
+                        <div class="form-check  border-bottom p-1 ml-2">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Kuş
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                        <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"><i class="fa fa-plus"></i> ######</button>
+                    </h2>
+                </div>
+                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="form-check border-bottom p-1 ml-2">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Default checkbox
+                            </label>
+                        </div>
+                        <div class="form-check border-bottom p-1 ml-2">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Default checkbox
+                            </label>
+                        </div>
+                        <div class="form-check border-bottom p-1 ml-2">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Default checkbox
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                        <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"><i class="fa fa-plus"></i> ######</button>
+                    </h2>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="form-check border-bottom p-1 ml-2">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Default checkbox
+                            </label>
+                        </div>
+                        <div class="form-check border-bottom p-1 ml-2">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Default checkbox
+                            </label>
+                        </div>
+                        <div class="form-check border-bottom p-1 ml-2">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Default checkbox
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Barınaktaki Hayvanlar Card Sistemi-->
+    <div class="col-md filter-row">
+
+        <div class="row row-cols-1 row-cols-md-3 row-cols-sm-3 g-4">
+            <div class="col mb-2">
+                <div class="card h-100 shadow-lg">
+                    <img src="https://www.dunyabulteni.net/images/resize/100/656x400/haberler/haber/2014/06/26/kedi11.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item font-weight-bold">Cins:</li>
+                        <li class="list-group-item font-weight-bold">Cinsiyet:</li>
+                        <li class="list-group-item font-weight-bold">Yaş</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-2">
+                <div class="card h-100 shadow-lg">
+                    <img src="https://i2.cnnturk.com/i/cnnturk/75/800x400/5e79c2d0bf21441b008b45b3" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item font-weight-bold">Cins:</li>
+                        <li class="list-group-item font-weight-bold">Cinsiyet:</li>
+                        <li class="list-group-item font-weight-bold">Yaş</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-2">
+                <div class="card h-100 shadow-lg">
+                    <img src="https://static.daktilo.com/sites/71/uploads/2020/07/03/5ca1c5ee45d2a029641856ae.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item font-weight-bold">Cins:</li>
+                        <li class="list-group-item font-weight-bold">Cinsiyet:</li>
+                        <li class="list-group-item font-weight-bold">Yaş</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-2">
+                <div class="card h-100 shadow-lg">
+                    <img src="https://www.iyihisset.com/sites/default/files/yasa/kediler_hakkinda_az_bilinen_50_sasirtici_bilgi_0_1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item font-weight-bold">Cins:</li>
+                        <li class="list-group-item font-weight-bold">Cinsiyet:</li>
+                        <li class="list-group-item font-weight-bold">Yaş</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-2">
+                <div class="card h-100 shadow-lg">
+                    <img src="https://www.dunyabulteni.net/images/resize/100/656x400/haberler/haber/2014/06/26/kedi11.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item font-weight-bold">Cins:</li>
+                        <li class="list-group-item font-weight-bold">Cinsiyet:</li>
+                        <li class="list-group-item font-weight-bold">Yaş</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-2">
+                <div class="card h-100 shadow-lg">
+                    <img src="https://www.dunyabulteni.net/images/resize/100/656x400/haberler/haber/2014/06/26/kedi11.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item font-weight-bold">Cins:</li>
+                        <li class="list-group-item font-weight-bold">Cinsiyet:</li>
+                        <li class="list-group-item font-weight-bold">Yaş</li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-toolbar mt-1 mb-3 justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group me-2" role="group" aria-label="First group">
+                <button type="button" class="btn btn-outline-secondary">1</button>
+                <button type="button" class="btn btn-outline-secondary">2</button>
+                <button type="button" class="btn btn-outline-secondary">3</button>
+                <button type="button" class="btn btn-outline-secondary">4</button>
+            </div>
+        </div>
+    </div>
+</div>
 
