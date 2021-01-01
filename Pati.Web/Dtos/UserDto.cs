@@ -5,8 +5,18 @@ using System.Threading.Tasks;
 
 namespace Pati.Web.Dtos
 {
-    public class UserDto : BaseDto
+    public class UserDto
     {
-        public string Role { get; set; }
+        public int UserId { get; set; }
+
+        public string UserFirstName { get; set; }
+        public string Email { get; set; }
+
+        public string UserBirthDate { get; set; }
+        public string UserLocation { get; set; }
+
+        public string Password { get; set; }
+
+        public string UserRole { get; set; }
     }
 }

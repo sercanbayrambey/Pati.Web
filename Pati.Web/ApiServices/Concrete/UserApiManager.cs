@@ -1,4 +1,5 @@
 ﻿using Pati.Web.ApiServices.Interfaces;
+using Pati.Web.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace Pati.Web.ApiServices.Concrete
         {
             _httpClient = httpClient;
 
-            _httpClient.BaseAddress = new Uri("localhost...");
+            _httpClient.BaseAddress = new Uri(StaticVars.BaseAPIAdress);
         }
 
 

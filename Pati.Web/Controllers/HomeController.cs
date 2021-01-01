@@ -19,8 +19,9 @@ namespace Pati.Web.Controllers
             _authService = authService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            await _authService.SignInAsync(new UserLoginDto { Email = "test@test.com",Password = "Asdasd123" });
             return View();
         }
 

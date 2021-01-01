@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
 using Pati.Web.Dtos;
+using Pati.Web.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,14 +29,14 @@ namespace Pati.Web.CustomFilters
 
             /// Get Active User with Token
             using var httpClient = new HttpClient();
+            httpClient.BaseAddress =new Uri(StaticVars.BaseAPIAdress);
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var responseMessage = httpClient.GetAsync("url").Result;
+            var responseMessage = httpClient.GetAsync("user/getUserData").Result;
             
             if(responseMessage.StatusCode == HttpStatusCode.OK)
             {
                 //Todo: Add user object
                 var activeUser = JsonConvert.DeserializeObject<UserDto>(responseMessage.Content.ReadAsStringAsync().Result);
-
                 if (!string.IsNullOrWhiteSpace(Roles))
                 {
                     bool canAccess = false;
@@ -44,7 +45,7 @@ namespace Pati.Web.CustomFilters
                         var acceptedRoles = Roles.Split(",");
                         foreach (var role in acceptedRoles)
                         {
-                            if (activeUser.Role.ToLower().Equals(role.ToLower()))
+                            if (activeUser.UserRole.ToLower().Equals(role.ToLower()))
                             {
                                 canAccess = true;
                                 break;
@@ -53,7 +54,7 @@ namespace Pati.Web.CustomFilters
                     }
                     else
                     {
-                        if (activeUser.Role.Equals(Roles))
+                        if (activeUser.UserRole.Equals(Roles))
                             canAccess = true;
                     }
 

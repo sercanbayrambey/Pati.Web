@@ -1,4 +1,4 @@
-﻿
+﻿@model List<PetDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,7 +6,7 @@
 
 <div class="row">
     <!--Filtre Bölümü-->
-    <div class="col-md-3 filter-row">
+    <div class="col-sm-3 filter-row">
         <!--Arama Çubuğu-->
         <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Arama Yap" aria-label="Arama Yap" aria-describedby="basic-addon2">
@@ -108,119 +108,31 @@
     </div>
 
     <!--Barınaktaki Hayvanlar Card Sistemi-->
-    <div class="col-md filter-row">
+    <div class="col-sm filter-row">
 
         <div class="row row-cols-1 row-cols-md-3 row-cols-sm-3 g-4">
-            <div class="col mb-2">
-                <div class="card h-100 shadow-lg">
-                    <img src="https://www.dunyabulteni.net/images/resize/100/656x400/haberler/haber/2014/06/26/kedi11.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item font-weight-bold">Cins:</li>
-                        <li class="list-group-item font-weight-bold">Cinsiyet:</li>
-                        <li class="list-group-item font-weight-bold">Yaş</li>
-                    </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-6 mb-2">
+                        <div class="card h-100 shadow-lg">
+                            <img src="https://www.dunyabulteni.net/images/resize/100/656x400/haberler/haber/2014/06/26/kedi11.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.PetName</h5>
+                                <p class="card-text">@item.PetAdditionInfo</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item font-weight-bold">Cins: @item.Genus</li>
+                                <li class="list-group-item font-weight-bold">Cinsiyet: @item.Gender</li>
+                                <li class="list-group-item font-weight-bold">Yaş: @(DateTime.Now.Subtract(item.PetBirthDate).Days / (365.25 / 12))</li>
+                            </ul>
+                            <div class="card-body">
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-block">Detaylar</a>
+                            </div>
+                        </div>
                 </div>
-            </div>
-            <div class="col mb-2">
-                <div class="card h-100 shadow-lg">
-                    <img src="https://i2.cnnturk.com/i/cnnturk/75/800x400/5e79c2d0bf21441b008b45b3" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item font-weight-bold">Cins:</li>
-                        <li class="list-group-item font-weight-bold">Cinsiyet:</li>
-                        <li class="list-group-item font-weight-bold">Yaş</li>
-                    </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-2">
-                <div class="card h-100 shadow-lg">
-                    <img src="https://static.daktilo.com/sites/71/uploads/2020/07/03/5ca1c5ee45d2a029641856ae.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item font-weight-bold">Cins:</li>
-                        <li class="list-group-item font-weight-bold">Cinsiyet:</li>
-                        <li class="list-group-item font-weight-bold">Yaş</li>
-                    </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-2">
-                <div class="card h-100 shadow-lg">
-                    <img src="https://www.iyihisset.com/sites/default/files/yasa/kediler_hakkinda_az_bilinen_50_sasirtici_bilgi_0_1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item font-weight-bold">Cins:</li>
-                        <li class="list-group-item font-weight-bold">Cinsiyet:</li>
-                        <li class="list-group-item font-weight-bold">Yaş</li>
-                    </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-2">
-                <div class="card h-100 shadow-lg">
-                    <img src="https://www.dunyabulteni.net/images/resize/100/656x400/haberler/haber/2014/06/26/kedi11.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item font-weight-bold">Cins:</li>
-                        <li class="list-group-item font-weight-bold">Cinsiyet:</li>
-                        <li class="list-group-item font-weight-bold">Yaş</li>
-                    </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col mb-2">
-                <div class="card h-100 shadow-lg">
-                    <img src="https://www.dunyabulteni.net/images/resize/100/656x400/haberler/haber/2014/06/26/kedi11.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item font-weight-bold">Cins:</li>
-                        <li class="list-group-item font-weight-bold">Cinsiyet:</li>
-                        <li class="list-group-item font-weight-bold">Yaş</li>
-                    </ul>
-                    <div class="card-body">
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+            }
 
+        </div>
         <div class="btn-toolbar mt-1 mb-3 justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group me-2" role="group" aria-label="First group">
                 <button type="button" class="btn btn-outline-secondary">1</button>

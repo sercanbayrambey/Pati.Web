@@ -18,18 +18,18 @@ namespace Pati.Web.ApiServices.Concrete
     {
         private readonly HttpClient _httpClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public AuthManager(HttpClient httpClient,IHttpContextAccessor httpContextAccessor)
+        public AuthManager(HttpClient httpClient, IHttpContextAccessor httpContextAccessor)
         {
             _httpClient = httpClient;
             _httpContextAccessor = httpContextAccessor;
 
-            httpClient.BaseAddress = new Uri("http://localhost");
+            httpClient.BaseAddress = new Uri(StaticVars.BaseAPIAdress);
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(ContentTypes.JSON));
         }
         public async Task<bool> SignInAsync(UserLoginDto userLoginDto)
         {
             StringContent stringContent = new StringContent(JsonConvert.SerializeObject(userLoginDto), Encoding.UTF8, ContentTypes.JSON);
-            var response = await _httpClient.PostAsync("login", stringContent);
+            var response = await _httpClient.PostAsync("auth/login", stringContent);
 
             if (response.IsSuccessStatusCode)
             {

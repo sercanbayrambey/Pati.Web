@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Pati.Web.CustomFilters;
+using Pati.Web.Dtos;
 using Pati.Web.StringConsts;
 
 namespace Pati.Web.Areas.Member.Controllers
 {
     [Area(AreaConsts.Member)]
+    [JwtAuthorize]
     public class PetsController : Controller
     {
         public IActionResult Index()
         {
-            return View();
+            List<PetDto> pets = new List<PetDto>();
+
+            pets.Add(new PetDto { PetName = "Reçel", PetBirthDate = DateTime.Now, PetAdditionInfo = "Çok güzel bir hayvan", Gender = "Erkek", Genus = "Sokak Kedisi" });
+            pets.Add(new PetDto { PetName = "Çakıl", PetBirthDate = DateTime.Now, PetAdditionInfo = "Çok güzel bir hayvan", Gender = "Karı", Genus = "Muhabbet kuşu" });
+            return View(pets);
         }
 
         public IActionResult Details(int id)
