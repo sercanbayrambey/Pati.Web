@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Pati.Data.Dtos;
 using Pati.Web.ApiServices.Interfaces;
 using Pati.Web.Models;
+using Pati.Web.Results;
 using Pati.Web.Utilities;
 using System;
 using System.Collections.Generic;
@@ -26,20 +27,21 @@ namespace Pati.Web.ApiServices.Concrete
             httpClient.BaseAddress = new Uri(StaticVars.BaseAPIAdress);
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(ContentTypes.JSON));
         }
-        public async Task<bool> SignInAsync(UserLoginDto userLoginDto)
+        public async Task<IResult> SignInAsync(UserLoginDto userLoginDto)
         {
             StringContent stringContent = new StringContent(JsonConvert.SerializeObject(userLoginDto), Encoding.UTF8, ContentTypes.JSON);
             var response = await _httpClient.PostAsync("auth/login", stringContent);
 
+            var responseContent = await response.Content.ReadAsStringAsync();
+
             if (response.IsSuccessStatusCode)
             {
-                var responseContent = await response.Content.ReadAsStringAsync();
                 _httpContextAccessor.HttpContext.Session.SetString("token", responseContent);
-                return true;
+                return new Result();
             }
             else
             {
-                return false;
+                return new Result(false, response.StatusCode, responseContent);
             }
         }
 
