@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
@@ -65,10 +66,6 @@ namespace Pati.Web.CustomFilters
                 }
 
 
-            }
-            else if(responseMessage.StatusCode == HttpStatusCode.Unauthorized)
-            {
-                context.Result = new RedirectToActionResult("Login", "Home", null);
             }
             else
             {

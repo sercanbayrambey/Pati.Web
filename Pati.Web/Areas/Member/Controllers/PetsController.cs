@@ -9,9 +9,7 @@ using Pati.Web.StringConsts;
 
 namespace Pati.Web.Areas.Member.Controllers
 {
-    [Area(AreaConsts.Member)]
-    [JwtAuthorize]
-    public class PetsController : Controller
+    public class PetsController : BaseController
     {
         public IActionResult Index()
         {

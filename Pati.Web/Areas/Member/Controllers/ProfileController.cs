@@ -7,8 +7,7 @@ using Pati.Web.StringConsts;
 
 namespace Pati.Web.Areas.Member.Controllers
 {
-    [Area(AreaConsts.Member)]
-    public class ProfileController : Controller
+    public class ProfileController : BaseController
     {
         public IActionResult Index()
         {

@@ -1,4 +1,4 @@
-﻿
+﻿@model UserLoginDto
 @{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,15 +7,13 @@
 <form class="shadow my-3 p-4 container" method="post" asp-action="Login">
     <h3 class="mb-3">Giriş Yap</h3>
     <div class="form-group">
-        @*<span asp-validation-for=""></span>*@
         <label>E-Posta:</label>
-        <input type="text" class="form-control" />
+        <input type="text" class="form-control" asp-for="@Model.Email" required />
     </div>
 
     <div class="form-group">
-        @*<span asp-validation-for=""></span>*@
         <label>Şifre:</label>
-        <input type="password" class="form-control" />
+        <input type="password" class="form-control" asp-for="Password" required />
     </div>
 
     <div>Hesabınız yok mu? <a asp-action="Register">Kayıt ol!</a></div>

@@ -10,13 +10,13 @@ namespace Pati.Web.Dtos
         public int UserId { get; set; }
 
         public string UserFirstName { get; set; }
-        public string Email { get; set; }
+        public string UserMail { get; set; }
+        public string UserPhoneNumber { get; set; }
 
         public string UserBirthDate { get; set; }
         public string UserLocation { get; set; }
-
+/*        public string UserSex { get; set; }*/
         public string Password { get; set; }
-
         public string UserRole { get; set; }
     }
 }
