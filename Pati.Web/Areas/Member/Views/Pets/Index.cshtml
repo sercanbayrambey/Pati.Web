@@ -110,10 +110,19 @@
     <!--Barınaktaki Hayvanlar Card Sistemi-->
     <div class="col-sm filter-row">
 
-        <div class="row row-cols-1 row-cols-md-3 row-cols-sm-3 g-4">
-            @foreach (var item in Model)
+        <div class="row  g-4">
+            @if (Model.Count == 0)
             {
-                <div class="col-sm-6 mb-2">
+                <div class="col-sm-12 justify-content-center">
+                    <div class="alert-info p-4 text-center my-2">Burada henüz bir şey yok :(</div>
+                </div>
+            }
+            else
+            {
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-sm-6 mb-2">
                         <div class="card h-100 shadow-lg">
                             <img src="https://www.dunyabulteni.net/images/resize/100/656x400/haberler/haber/2014/06/26/kedi11.jpg" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -129,7 +138,8 @@
                                 <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-block">Detaylar</a>
                             </div>
                         </div>
-                </div>
+                    </div>
+                }
             }
 
         </div>
