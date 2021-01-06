@@ -37,8 +37,19 @@ a {
 }
 
 .navbar-nav li a {
-    color: white !important;
+    color: white;
 }
+
+
+.navbar-nav li a:hover {
+    color: lightgray;
+}
+
+
+.nav-link :hover {
+    color: lightgray !important;
+}
+
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
@@ -113,3 +124,6 @@ body {
         margin: 0rem;
     }
 }
+
+
+

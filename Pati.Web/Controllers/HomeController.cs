@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Pati.Data.Dtos;
 using Pati.Web.ApiServices.Interfaces;
+using Pati.Web.Dtos;
 using Pati.Web.Models;
 using Pati.Web.StringConsts;
 
@@ -15,18 +16,24 @@ namespace Pati.Web.Controllers
     public class HomeController : BaseController
     {
         private readonly IAuthService _authService;
-        public HomeController(ILogger<HomeController> logger, IAuthService authService)
+        private readonly IUserApiService _userApiService;
+        public HomeController(ILogger<HomeController> logger, IAuthService authService, IUserApiService userApiService)
         {
             _authService = authService;
+            _userApiService = userApiService;
         }
 
         public async Task<IActionResult> Index()
         {
+            if (_authService.GetActiveUser().Result.Success)
+                return RedirectToAction("Index", "Home", new { area = AreaConsts.Member });
             return View();
         }
 
         public async Task<IActionResult> Login()
         {
+            if (_authService.GetActiveUser().Result.Success)
+                return RedirectToAction("Index", "Home", new { area = AreaConsts.Member });
             return View(new UserLoginDto());
         }
 
@@ -41,7 +48,6 @@ namespace Pati.Web.Controllers
             }
             else
             {
-                ErrorAlert("dasdsdadas");
                 ErrorAlert(loginResult.Message);
                 return View(dto);
             }
@@ -49,8 +55,28 @@ namespace Pati.Web.Controllers
 
         public IActionResult Register()
         {
-            return View();
+            if (_authService.GetActiveUser().Result.Success)
+                return RedirectToAction("Index", "Home", new { area = AreaConsts.Member });
+            return View(new UserDto());
         }
+
+        [HttpPost]
+        public async  Task<IActionResult> Register(UserDto userDto)
+        {
+            var registerResult = await _userApiService.RegisterAsync(userDto);
+            if (registerResult.Success)
+            {
+                SuccessAlert("Kayıt başarılı.");
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                ErrorAlert(registerResult.Message);
+                return View(userDto);
+            }
+
+        }
+
 
         public async Task<IActionResult> Logout()
         {

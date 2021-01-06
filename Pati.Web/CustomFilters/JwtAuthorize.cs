@@ -24,7 +24,7 @@ namespace Pati.Web.CustomFilters
             
             if (string.IsNullOrWhiteSpace(token))
             {
-                context.Result = new RedirectToActionResult("Login", "Home", null);
+                context.Result = new RedirectToActionResult("Login", "Home", new { area = "" });
                 return;
             }
 

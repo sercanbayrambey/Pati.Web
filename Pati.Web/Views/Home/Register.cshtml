@@ -1,41 +1,93 @@
-﻿
+﻿@model UserDto
 @{
     ViewData["Title"] = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<form class="shadow my-3 p-4 container" method="post" asp-action="Login">
+<form class="shadow my-3 p-4 container" method="post" asp-action="Register">
     <h3 class="mb-3">Kayıt Ol</h3>
 
-    <div class="form-group">
-        @*<span asp-validation-for=""></span>*@
-        <label>E-Posta:</label>
-        <input type="text" class="form-control" />
-    </div>
+    <div class="row">
 
-    <div class="form-group">
-        @*<span asp-validation-for=""></span>*@
-        <label>Ad Soyad:</label>
-        <input type="text" class="form-control" />
-    </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>E-Posta:</label>
+                <input type="email" class="form-control" asp-for="UserMail" required />
+            </div>
+        </div>
 
-    <div class="form-group">
-        @*<span asp-validation-for=""></span>*@
-        <label>Şifre:</label>
-        <input type="password" class="form-control" />
-    </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Telefon:</label>
+                <input type="tel" class="form-control" asp-for="UserPhoneNumber" maxlength="11" required />
+            </div>
+        </div>
 
-    <div class="form-group">
-        @*<span asp-validation-for=""></span>*@
-        <label>Şifre Tekrar:</label>
-        <input type="password" class="form-control" />
+     
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Şifre:</label>
+                <input type="password" class="form-control" asp-for="Password" required />
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Şifre Tekrar:</label>
+                <input type="password" class="form-control" asp-for="ConfirmPassword" required />
+            </div>
+        </div>
+
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Ad:</label>
+                <input type="text" class="form-control" asp-for="UserFirstName" required />
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Soyad:</label>
+                <input type="text" class="form-control" asp-for="UserLastName" required />
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+
+            <div class="form-group">
+                <label>Cinsiyet:</label>
+                <select asp-for="UserSex" class="form-control">
+                    <option value="0">Kadın</option>
+                    <option value="1">Erkek</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Location:</label>
+                <select asp-for="UserLocation" class="form-control">
+                    <option value="6">Ankara</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label>Doğum Günü:</label>
+                <input class="form-control" type="date" asp-for="UserBirthDate" />
+            </div>
+        </div>
+
     </div>
 
     <div>Hesabınız var mı? <a asp-action="Login">Giriş yap!</a></div>
 
     <div class="mt-2">
         <a class="btn btn-warning"> Geri Git</a>
-        <button type="submit" class="btn btn-success">Kayıt Ol</button>
+        <button type="submit" class="btn btn-success float-right">Kayıt Ol</button>
     </div>
 </form>
 
