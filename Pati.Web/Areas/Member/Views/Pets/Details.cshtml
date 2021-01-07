@@ -1,11 +1,10 @@
-﻿
+﻿@model PetDto 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container-fluid">
-
 
     <div class="row pt-2">
         <div class="card mb-3 p-4">
@@ -42,11 +41,12 @@
                         </div>
 
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Adı:</li>
-                            <li class="list-group-item">Yaş:</li>
-                            <li class="list-group-item">Cins:</li>
-                            <li class="list-group-item">Cinsiyet:</li>
-                            <li class="list-group-item">Aşılar:</li>
+                            <li class="list-group-item">Adı: @Model.PetName</li>
+                            <li class="list-group-item">Yaş: @Model.PetBirthDate</li>
+                            <li class="list-group-item">Cins: @Model.Genus</li>
+                            <li class="list-group-item">Cinsiyet: @Model.Gender</li>
+                            <li class="list-group-item">Aşılar: @Model.PetVaccineInfo</li>
+                            <li class="list-group-item">Kilo: @Model.PetWeight kg</li>
                             <li class="list-group-item">Tuvalet Eğitimi:</li>
                         </ul>
                         <br />

@@ -21,10 +21,10 @@ namespace Pati.Web.Areas.Member.Controllers
         }
         public async Task<IActionResult> Index(int p = 1)
         {
-            var request = await _petApiService.List(p);
-            if (request.Success)
+            var response = await _petApiService.List(p);
+            if (response.Success)
             {
-                var dtoList = new StaticPagedList<PetDto>(request.Data,p,20,200);
+                var dtoList = new StaticPagedList<PetDto>(response.Data,p,20,200);
                 
                 return View(dtoList);
             }
@@ -34,9 +34,24 @@ namespace Pati.Web.Areas.Member.Controllers
             }
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            return View();
+            var response = await _petApiService.GetById(id);
+            
+            if (response.Success)
+            {
+                if (response.Data == null)
+                {
+                    return NotFound();
+                }
+
+                return View(response.Data);
+            }
+            else
+            {
+                return StatusCode((int)response.StatusCode);
+            }
+
         }
     }
 }
