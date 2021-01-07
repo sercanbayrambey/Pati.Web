@@ -7,6 +7,7 @@ namespace Pati.Web.Utilities
 {
     public static class StaticVars
     {
-        public static string BaseAPIAdress { get; set; } = "http://patiapp.herokuapp.com/api/";
+        public const string BaseAPIAdress = "http://patiapp.herokuapp.com/api/";
+        public const int PaginationPageSize = 21; 
     }
 }

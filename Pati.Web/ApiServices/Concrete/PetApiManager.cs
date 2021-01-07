@@ -19,14 +19,34 @@ namespace Pati.Web.ApiServices.Concrete
         public PetApiManager(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _httpClient.BaseAddress = new Uri(StaticVars.BaseAPIAdress);
+            _httpClient.BaseAddress = new Uri(StaticVars.BaseAPIAdress + "pet/ ");
+        }
+
+        public async Task<IDataResult<PetDto>> GetById(int id)
+        {
+            var query = new Dictionary<string, string>
+            {
+                ["id"] = id.ToString()
+            };
+
+            var response = await _httpClient.GetAsync(QueryHelpers.AddQueryString("getPet", query));
+            if (response.IsSuccessStatusCode)
+            {
+                var dto = JsonConvert.DeserializeObject<PetDto>(await response.Content.ReadAsStringAsync());
+                return new DataResult<PetDto>(dto, true, response.StatusCode);
+            }
+            else
+            {
+                return new DataResult<PetDto>(null, false, response.StatusCode);
+            }
         }
 
         public async Task<IDataResult<List<PetDto>>> List(int currentPage = 1)
         {
+
             var query = new Dictionary<string, string>
             {
-                ["pageId"] = currentPage.ToString()
+                ["p"] = currentPage.ToString()
             };
 
             var response = await _httpClient.GetAsync(QueryHelpers.AddQueryString("getPets", query));

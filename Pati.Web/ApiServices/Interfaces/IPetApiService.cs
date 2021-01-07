@@ -10,5 +10,6 @@ namespace Pati.Web.ApiServices.Interfaces
     public interface IPetApiService
     {
         Task<IDataResult<List<PetDto>>> List(int currentPage = 1);
+        Task<IDataResult<PetDto>> GetById(int id);
     }
 }

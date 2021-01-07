@@ -7,6 +7,8 @@ using Pati.Web.ApiServices.Interfaces;
 using Pati.Web.CustomFilters;
 using Pati.Web.Dtos;
 using Pati.Web.StringConsts;
+using Pati.Web.Utilities;
+using X.PagedList;
 
 namespace Pati.Web.Areas.Member.Controllers
 {
@@ -17,16 +19,18 @@ namespace Pati.Web.Areas.Member.Controllers
         {
             _petApiService = petApiService;
         }
-        public async Task<IActionResult> Index(int currentPage = 1)
+        public async Task<IActionResult> Index(int p = 1)
         {
-            var request = await _petApiService.List(currentPage);
+            var request = await _petApiService.List(p);
             if (request.Success)
             {
-                return View(request.Data);
+                var dtoList = new StaticPagedList<PetDto>(request.Data,p,20,200);
+                
+                return View(dtoList);
             }
             else
             {
-                return View(new List<PetDto>());
+                return View(new PagedList<PetDto>(new List<PetDto>(),p,StaticVars.PaginationPageSize));
             }
         }
 

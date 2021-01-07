@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace Pati.Web.Dtos
 {
-    public class PetDto : BaseDto
+    public class PetDto
     {
+        public int PetId { get; set; }
         public int ShelterId { get; set; }
         public int SpeciesId { get; set; }
         public string PetName { get; set; }
