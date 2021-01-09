@@ -24,7 +24,7 @@
 
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Pets" ? "active" : "")">
                         <a class="nav-link" asp-action="Index">
                             <i class="fas fa-home mr-2"></i>Ana Sayfa
                             <span class="sr-only">(current)</span>

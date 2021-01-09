@@ -41,7 +41,7 @@
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="nav-item active">
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Pets" ? "active" : "")">
                         <a class="nav-link" asp-action="Index" asp-controller="Pets">
                             <i class="material-icons">pets</i>
                             <p>Hayvanları Yönet</p>
@@ -53,7 +53,7 @@
                             <p>Üyeleri Yönet</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "User" ? "active" : "")">
                         <a asp-action="Index" asp-controller="User" class="nav-link">
                             <i class="material-icons">text_snippet</i>
                             <p>Logs</p>

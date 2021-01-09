@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
 using Pati.Web.Dtos;
+using Pati.Web.ExtensionMethods;
 using Pati.Web.Utilities;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace Pati.Web.CustomFilters
             /// Get Active User with Token
             using var httpClient = new HttpClient();
             httpClient.BaseAddress =new Uri(StaticVars.BaseAPIAdress);
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            httpClient.AddJwtTokenToHeader(token);
             var responseMessage = httpClient.GetAsync("user/getUserData").Result;
             
             if(responseMessage.StatusCode == HttpStatusCode.OK)

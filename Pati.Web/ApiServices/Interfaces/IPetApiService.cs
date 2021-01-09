@@ -11,5 +11,9 @@ namespace Pati.Web.ApiServices.Interfaces
     {
         Task<IDataResult<List<PetDto>>> List(int currentPage = 1);
         Task<IDataResult<PetDto>> GetById(int id);
+        Task<IResult> Add(PetDto dto);
+
+        Task<IResult> Update(PetDto dto);
+        Task<IResult> Delete(int id);
     }
 }
