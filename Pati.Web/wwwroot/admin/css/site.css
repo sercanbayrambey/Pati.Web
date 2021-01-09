@@ -1,0 +1,33 @@
+﻿.contactDetails .modal-dialog {
+    max-width: 1200px !important;
+}
+
+#contactList tbody tr{
+    cursor: pointer;
+}
+
+#contactPeopleForm #btnSubmit {
+    margin-top: 1.5em !important;
+}
+
+.form-control.form-control-bordered {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.form-control.form-control-bordered, .is-focused .form-control.form-control-bordered {
+    background-image: None !important;
+}
+
+#searchIcon{
+    cursor:pointer; 
+}

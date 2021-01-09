@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewData["Title"] = "Hayvanlar";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header card-header-primary">
+            <div class="row">
+                <div class="col-sm-10">
+                    <h4 class="card-title ">Hayvanlar</h4>
+                    <p class="card-category">Buradan sistemde kayıtlı hayvanları yönetebilirsiniz.</p>
+                </div>
+                <div class="col-sm-2">
+                    <a class="btn btn-success pull-right" asp-action="Add">Yeni Hayvan Ekle</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive table-hover">
+                <table class="table">
+                    <thead class=" text-info">
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th>İsim</th>
+                            <th>
+                                Tür
+                            </th>
+                            <th>
+                                Cins
+                            </th>
+                            <th>
+                                Cinsiyet
+                            </th>
+                            <th>Doğum Tarihi</th>
+                            <th>#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>1</td>
+                            <td>Reçel</td>
+                            <td>Kedi</td>
+                            <td>Sokak Kedisi</td>
+                            <td>Dişi</td>
+                            <td>2012</td>
+                            <td>
+                                <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?');" asp-action="Delete" asp-controller="Pet" @*asp-route-id="@item.Id"*@><i class="fas fa-trash-alt mr-2"></i>Delete</a>
+                                <a class="btn btn-warning" asp-action="Update" @*asp-route-id="@item.Id"*@ asp-controller="Pet"><i class="fas fa-edit mr-2"></i>Edit</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Reçel</td>
+                            <td>Kedi</td>
+                            <td>Sokak Kedisi</td>
+                            <td>Dişi</td>
+                            <td>2012</td>
+                            <td>
+                                <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?');" asp-action="Delete" asp-controller="Pet" @*asp-route-id="@item.Id"*@><i class="fas fa-trash-alt mr-2"></i>Delete</a>
+                                <a class="btn btn-warning" asp-action="Update" @*asp-route-id="@item.Id"*@ asp-controller="Pet"><i class="fas fa-edit mr-2"></i>Edit</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Reçel</td>
+                            <td>Kedi</td>
+                            <td>Sokak Kedisi</td>
+                            <td>Dişi</td>
+                            <td>2012</td>
+                            <td>
+                                <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?');" asp-action="Delete" asp-controller="Pet" @*asp-route-id="@item.Id"*@><i class="fas fa-trash-alt mr-2"></i>Delete</a>
+                                <a class="btn btn-warning" asp-action="Update" @*asp-route-id="@item.Id"*@ asp-controller="Pet"><i class="fas fa-edit mr-2"></i>Edit</a>
+                            </td>
+                        </tr>
+
+
+
+
+
+                        @*                  @foreach (var item in Model)
+        {
+            <tr>
+                <td data-toggle="modal" data-target="#contactDetails-@item.Id">
+                    @item.Id
+                </td>
+                <td data-toggle="modal" data-target="#contactDetails-@item.Id">
+                    @item.Name
+                </td>
+                <td data-toggle="modal" data-target="#contactDetails-@item.Id">
+                    @item.Email
+                </td>
+                <td data-toggle="modal" data-target="#contactDetails-@item.Id">
+                    @foreach (var role in item.EnumRoles)
+                    {
+                        @(role + (item.EnumRoles.Last() == role ? "" : ", "))
+                    }
+                </td>
+
+                <td>
+                    <a class="btn btn-warning" asp-action="Update" asp-route-id="@item.Id" asp-controller="User">Edit</a>
+                    <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?');" asp-action="Delete" asp-controller="User" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+
+        }*@
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

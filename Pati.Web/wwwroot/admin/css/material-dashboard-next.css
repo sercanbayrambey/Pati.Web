@@ -1,0 +1,25 @@
+﻿.sidebar:before {
+    background-color: white !important;
+}
+
+
+
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+
+.bmd-form-group [class*=" bmd-label"], .bmd-form-group [class^=bmd-label] {
+    position: relative !important;
+}
+
+
+
+a:not([href]):not([tabindex]), a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
+    color: white!important;
+}
