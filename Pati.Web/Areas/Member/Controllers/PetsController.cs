@@ -24,8 +24,9 @@ namespace Pati.Web.Areas.Member.Controllers
             var response = await _petApiService.List(p);
             if (response.Success)
             {
-                var dtoList = new StaticPagedList<PetDto>(response.Data,p,20,200);
-                
+                var dataCount = await _petApiService.GetPetCount();
+                var dtoList = new StaticPagedList<PetDto>(response.Data, p, 21, dataCount.Data);
+
                 return View(dtoList);
             }
             else

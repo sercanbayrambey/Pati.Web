@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Pati.Web.ApiServices.Interfaces;
 using Pati.Web.Dtos;
 using Pati.Web.Utilities;
@@ -19,10 +20,12 @@ namespace Pati.Web.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index(int p = 1)
         {
+           
             var response = await _petApiService.List(p);
             if (response.Success)
             {
-                var dtoList = new StaticPagedList<PetDto>(response.Data, p, 20, 200);
+                var dataCount = await _petApiService.GetPetCount();
+                var dtoList = new StaticPagedList<PetDto>(response.Data, p, 21, dataCount.Data);
 
                 return View(dtoList);
             }
@@ -52,7 +55,7 @@ namespace Pati.Web.Areas.Admin.Controllers
             }
             else
             {
-                Alert("Ekleme işlemi başarısız.");
+                Alert("Ekleme işlemi başarısız." + result.Message);
                 return View(dto);
             }
         }
@@ -66,7 +69,7 @@ namespace Pati.Web.Areas.Admin.Controllers
             }
             else
             {
-                Alert("Pet bulunamadı.");
+                Alert("Pet bulunamadı." + result.Message);
                 return RedirectToAction("Index");
             }
         }
@@ -83,8 +86,7 @@ namespace Pati.Web.Areas.Admin.Controllers
             }
             else
             {
-                Alert("Güncelleme işlemi başarısız.");
-                
+                Alert("Güncelleme işlemi başarısız.: " + result.Message);
                 return View("AddOrUpdate", dto);
             }
         }
@@ -98,11 +100,12 @@ namespace Pati.Web.Areas.Admin.Controllers
             }
             else
             {
-                Alert("Silme işlemi başarısız.");
+                Alert("Silme işlemi başarısız." + result.Message);
             }
 
             return RedirectToAction("Index");
         }
+
 
 
     }

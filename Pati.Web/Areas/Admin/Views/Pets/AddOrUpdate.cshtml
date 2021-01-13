@@ -1,0 +1,111 @@
+﻿@model PetDto
+
+@{
+    var isEdit = Model.PetId > 0;
+    var title = isEdit ? "Hayvanı DÜzenle" : "Yeni Hayvan Ekle";
+}
+
+
+@{
+    ViewData["Title"] = title;
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="card card-user">
+    <div class="card-header">
+        <h5 class="card-title">@title</h5>
+    </div>
+    <div class="card-body">
+        <form asp-action="@(isEdit ? "Update" : "Add")" asp-controller="Pets" method="post">
+            <div class="row">
+                <div class="col-md-12">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="row">
+
+                        <input type="hidden" value="@Model.PetId" asp-for="PetId" />
+                        <input type="hidden" value="1" asp-for="ShelterId" />
+                        <input type="hidden" value="1" asp-for="SpeciesId" />
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Adı:</label>
+                                <input asp-for="@Model.PetName" required="" class="form-control form-control-bordered" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Doğum Tarihi</label>
+                                <input type="date" asp-for="@Model.PetBirthDate" value="@(isEdit ?  Model.PetBirthDate.ToString("dd-MM-yyyy") :  DateTime.Today.ToString("dd-MM-yyyy"))" class="form-control form-control-bordered" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">    
+                                <label>Cinsiyeti:</label>
+                                <select class="form-control form-control-bordered" asp-for="PetGender" asp-items="Html.GetEnumSelectList<Pati.Web.Enums.PetGender>()">
+                                    <option selected="selected" value="">Please select</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Genel Bilgileri</label>
+                                <textarea class="form-control form-control-bordered" asp-for="PetAdditionInfo"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Aşı Bilgileri</label>
+                                <textarea class="form-control form-control-bordered" asp-for="PetVaccineInfo"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Boyu</label>
+                                <input type="text" asp-for="PetWeight" class="form-control form-control-bordered" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Kilosu</label>
+                                <input type="text" asp-for="PetHeight" class="form-control form-control-bordered" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Pasaportu var mı?</label>
+                                <br />
+                                <label class="switch">
+                                    <input type="checkbox" asp-for="HasPassport" />
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success pull-left">Kaydet</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+

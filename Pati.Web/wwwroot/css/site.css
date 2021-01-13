@@ -126,4 +126,21 @@ body {
 }
 
 
+.dark-bg {
+    background-image: linear-gradient(rgba(0,0,0, .8), rgba(0,0,0, .9)), url('../img/main_bg.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+#hero .container {
+    height: 75vh;
+    padding:0px;
+}
+
+.generic {
+    padding: 100px 0;
+}
+
+
 

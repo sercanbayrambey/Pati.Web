@@ -33,7 +33,7 @@ namespace Pati.Web.CustomFilters
             using var httpClient = new HttpClient();
             httpClient.BaseAddress =new Uri(StaticVars.BaseAPIAdress);
             httpClient.AddJwtTokenToHeader(token);
-            var responseMessage = httpClient.GetAsync("user/getUserData").Result;
+            var responseMessage = httpClient.GetAsync("user").Result;
             
             if(responseMessage.StatusCode == HttpStatusCode.OK)
             {

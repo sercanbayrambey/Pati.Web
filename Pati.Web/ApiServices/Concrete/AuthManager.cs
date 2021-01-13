@@ -73,7 +73,7 @@ namespace Pati.Web.ApiServices.Concrete
         {
             var token = _httpContextAccessor.HttpContext.Session.GetString("token");
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var responseMessage = _httpClient.GetAsync("user/getUserData").Result;
+            var responseMessage = _httpClient.GetAsync("user").Result;
 
             if (responseMessage.StatusCode == HttpStatusCode.OK)
             {

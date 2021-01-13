@@ -23,13 +23,12 @@ namespace Pati.Web.ApiServices.Concrete
         public PetApiManager(HttpClient httpClient, IHttpContextAccessor httpContextAccessor)
         {
             _httpClient = httpClient;
-            _httpClient.BaseAddress = new Uri(StaticVars.BaseAPIAdress + "pet/ ");
+            _httpClient.BaseAddress = new Uri(StaticVars.BaseAPIAdress + "pet/");
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IResult> Add(PetDto dto)
         {
-            if (dto.PetId <= 0)
-                return new ErrorResult();
 
             var postData = JsonConvert.SerializeObject(dto);
             
@@ -42,7 +41,7 @@ namespace Pati.Web.ApiServices.Concrete
 
             _httpClient.AddJwtTokenToHeader(token);
 
-            var response = await _httpClient.PostAsync("addPet",content);
+            var response = await _httpClient.PostAsync("",content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -66,7 +65,7 @@ namespace Pati.Web.ApiServices.Concrete
                 ["id"] = id.ToString()
             };
 
-            var response = await _httpClient.GetAsync(QueryHelpers.AddQueryString("getPet", query));
+            var response = await _httpClient.GetAsync(QueryHelpers.AddQueryString("", query));
             if (response.IsSuccessStatusCode)
             {
                 var dto = JsonConvert.DeserializeObject<PetDto>(await response.Content.ReadAsStringAsync());
@@ -75,6 +74,19 @@ namespace Pati.Web.ApiServices.Concrete
             else
             {
                 return new DataResult<PetDto>(null, false, response.StatusCode);
+            }
+        }
+
+        public async Task<IDataResult<int>> GetPetCount()
+        {
+            var response = await _httpClient.GetAsync("petCount");
+            if (response.IsSuccessStatusCode)
+            {
+                return new DataResult<int>(Convert.ToInt32(await response.Content.ReadAsStringAsync()), true, response.StatusCode);
+            }
+            else
+            {
+                return new DataResult<int>(0, false, response.StatusCode);
             }
         }
 
@@ -98,9 +110,34 @@ namespace Pati.Web.ApiServices.Concrete
             }
         }
 
-        public Task<IResult> Update(PetDto dto)
+        public async Task<IResult> Update(PetDto dto)
         {
-            throw new NotImplementedException();
+            if (dto.PetId <= 0)
+                return new ErrorResult();
+
+            var postData = JsonConvert.SerializeObject(dto);
+
+            var content = new StringContent(postData, Encoding.UTF8, "application/json");
+
+            var token = _httpContextAccessor.HttpContext.Session.GetString("token");
+
+            if (string.IsNullOrEmpty(token))
+                return new ErrorResult("Unauthorized.");
+
+            var petToUpdate = await GetById(dto.PetId);
+
+            _httpClient.AddJwtTokenToHeader(token);
+
+            var response = await _httpClient.PutAsync("", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return new Result();
+            }
+            else
+            {
+                return new ErrorResult(await response.Content.ReadAsStringAsync());
+            }
         }
     }
 }

@@ -25,7 +25,7 @@
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Pets" ? "active" : "")">
-                        <a class="nav-link" asp-action="Index">
+                        <a class="nav-link" asp-action="Index" asp-controller="Home">
                             <i class="fas fa-home mr-2"></i>Ana Sayfa
                             <span class="sr-only">(current)</span>
                         </a>
@@ -39,15 +39,13 @@
         </nav>
     </header>
 
-    <div class="container-fluid">
-        <main role="main" class="pb-3">
-            @if (TempData["notification"] != null)
-            {
-                @Html.Raw(TempData["notification"])
-            }
-            @RenderBody()
-        </main>
-    </div>
+    <main role="main" class="pb-3">
+        @if (TempData["notification"] != null)
+        {
+            @Html.Raw(TempData["notification"])
+        }
+        @RenderBody()
+    </main>
 
     <footer class="border-top footer text-muted">
         <div class="container-fluid" style="background-image: linear-gradient(to right,#fa4197,#726eff);color: white">
