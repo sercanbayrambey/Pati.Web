@@ -1,4 +1,5 @@
-﻿using Pati.Web.Enums;
+﻿using Microsoft.AspNetCore.Http;
+using Pati.Web.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace Pati.Web.Dtos
         public bool HasPassport { get; set; }
         public string Genus { get; set; }
         public PetGender PetGender { get; set; }
+        public List<IFormFile> Files { get; set; }
 
     }
 }

@@ -81,5 +81,9 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+.form-group input[type=file] {
+     opacity: 1 !important; 
+     position: static !important; 
+}
 
 /* end of bootstrap switch size alternative - md */

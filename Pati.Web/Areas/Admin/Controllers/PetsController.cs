@@ -5,6 +5,7 @@ using Pati.Web.Dtos;
 using Pati.Web.Utilities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
@@ -14,13 +15,15 @@ namespace Pati.Web.Areas.Admin.Controllers
     public class PetsController : BaseController
     {
         private readonly IPetApiService _petApiService;
-        public PetsController(IPetApiService petApiService)
+        private readonly IFileService _fileService;
+        public PetsController(IPetApiService petApiService, IFileService fileService)
         {
             _petApiService = petApiService;
+            _fileService = fileService;
         }
         public async Task<IActionResult> Index(int p = 1)
         {
-           
+
             var response = await _petApiService.List(p);
             if (response.Success)
             {
@@ -39,13 +42,17 @@ namespace Pati.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Add()
         {
             var dto = new PetDto();
-            
+
             return View("AddOrUpdate", dto);
         }
 
         [HttpPost]
         public async Task<IActionResult> Add(PetDto dto)
         {
+            
+
+            await _fileService.UploadFile(dto.Files);
+
             var result = await _petApiService.Add(dto);
             if (result.Success)
             {

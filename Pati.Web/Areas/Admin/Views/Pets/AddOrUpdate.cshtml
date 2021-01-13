@@ -18,7 +18,7 @@
         <h5 class="card-title">@title</h5>
     </div>
     <div class="card-body">
-        <form asp-action="@(isEdit ? "Update" : "Add")" asp-controller="Pets" method="post">
+        <form asp-action="@(isEdit ? "Update" : "Add")" asp-controller="Pets" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-12">
                     <div asp-validation-summary="All" class="text-danger"></div>
@@ -43,7 +43,7 @@
                         </div>
 
                         <div class="col-sm-4">
-                            <div class="form-group">    
+                            <div class="form-group">
                                 <label>Cinsiyeti:</label>
                                 <select class="form-control form-control-bordered" asp-for="PetGender" asp-items="Html.GetEnumSelectList<Pati.Web.Enums.PetGender>()">
                                     <option selected="selected" value="">Please select</option>
@@ -76,6 +76,14 @@
                             <div class="form-group">
                                 <label>Kilosu</label>
                                 <input type="text" asp-for="PetHeight" class="form-control form-control-bordered" />
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="petImages">Resimler</label>
+                                <input type="file"  multiple asp-for="Files"  />
                             </div>
                         </div>
 
