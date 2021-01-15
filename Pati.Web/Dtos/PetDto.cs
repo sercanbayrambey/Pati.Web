@@ -19,7 +19,7 @@ namespace Pati.Web.Dtos
         public bool HasPassport { get; set; }
         public string Genus { get; set; }
         public PetGender PetGender { get; set; }
-        public IEnumerable<string> Images { get; set; }
+        public List<string> Images { get; set; }
 
     }
 }

@@ -43,7 +43,7 @@ namespace Pati.Web.ApiServices.Concrete
                 var fileContent = await ConvertToByte(item);
                 var fileName = await GenerateFileName(item.FileName);
                 uploadedFileNames.Add(fileName);
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://ftp.taninticaret.net/images/pati/" + fileName);
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(StaticVars.BaseFTPAddress + fileName);
                 request.Credentials = new NetworkCredential("u247404070.pati", "Pati2020");
                 request.Method = WebRequestMethods.Ftp.UploadFile;
 

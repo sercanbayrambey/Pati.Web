@@ -24,7 +24,6 @@ namespace Pati.Web.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index(int p = 1)
         {
-
             var response = await _petApiService.List(p);
             if (response.Success)
             {

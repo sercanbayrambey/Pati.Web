@@ -12,15 +12,17 @@
                 <div class="col-md-6">
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="https://www.dunyabulteni.net/images/resize/100/656x400/haberler/haber/2014/06/26/kedi11.jpg" class="d-block w-100" alt="..." style="max-height:500px;">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://i2.cnnturk.com/i/cnnturk/75/800x400/5e79c2d0bf21441b008b45b3" class="d-block w-100" alt="..." style="max-height:500px;">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://static.daktilo.com/sites/71/uploads/2020/07/03/5ca1c5ee45d2a029641856ae.jpg" class="d-block w-100" alt="..." style="max-height:500px;">
-                            </div>
+                            
+
+                            @for (int i = 0; i < Model.Images.Count(); i++)
+                            {
+                                <div class="carousel-item @(i==0 ? "active" : "")">
+                                    <img src="@Model.Images[i]" class="d-block w-100" alt="..." style="max-height:500px;">
+                                </div>
+                            }
+
+
+
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

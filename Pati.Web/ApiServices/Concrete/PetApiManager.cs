@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Pati.Web.ApiServices.Interfaces;
 using Pati.Web.Dtos;
 using Pati.Web.ExtensionMethods;
+using Pati.Web.Models;
 using Pati.Web.Results;
 using Pati.Web.Utilities;
 using System;
@@ -64,7 +65,7 @@ namespace Pati.Web.ApiServices.Concrete
 
 
 
-   /*         var token = _httpContextAccessor.HttpContext.Session.GetString("token");
+           /* var token = _httpContextAccessor.HttpContext.Session.GetString("token");
 
             if (string.IsNullOrEmpty(token))
                 return new DataResult<string>("Unauthorized.", false, System.Net.HttpStatusCode.NotFound);
@@ -82,7 +83,7 @@ namespace Pati.Web.ApiServices.Concrete
             }
         }
 
-        public Task<IResult> Delete(int id)
+        public async Task<IResult> Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -98,6 +99,7 @@ namespace Pati.Web.ApiServices.Concrete
             if (response.IsSuccessStatusCode)
             {
                 var dto = JsonConvert.DeserializeObject<PetDto>(await response.Content.ReadAsStringAsync());
+                dto.Images = await GetPetImages(dto.PetId);
                 return new DataResult<PetDto>(dto, true, response.StatusCode);
             }
             else
@@ -119,6 +121,31 @@ namespace Pati.Web.ApiServices.Concrete
             }
         }
 
+        public async Task<List<string>> GetPetImages(int petId)
+        {
+            var query = new Dictionary<string, string>
+            {
+                ["id"] = petId.ToString()
+            };
+
+            var response = await _httpClient.GetAsync(QueryHelpers.AddQueryString("photo", query));
+            if (response.IsSuccessStatusCode)
+            {
+                var imageList = JsonConvert.DeserializeObject<List<PetPictureApiModel>>(await response.Content.ReadAsStringAsync());
+                if (imageList.Count == 0)
+                {
+                    var list = new List<string>();
+                    list.Add(StaticVars.);
+                    return list;
+                }
+                return imageList.Select(x=>StaticVars.BaseImageAddress + x.PictureUrl).ToList();
+            }
+            else
+            {
+                return new List<string>();
+            }
+        }
+
         public async Task<IDataResult<List<PetDto>>> List(int currentPage = 1)
         {
 
@@ -131,6 +158,7 @@ namespace Pati.Web.ApiServices.Concrete
             if (response.IsSuccessStatusCode)
             {
                 var dto = JsonConvert.DeserializeObject<List<PetDto>>(await response.Content.ReadAsStringAsync());
+                dto.ForEach(x => x.Images = GetPetImages(x.PetId).Result);
                 return new DataResult<List<PetDto>>(dto, true, response.StatusCode);
             }
             else

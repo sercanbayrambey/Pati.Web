@@ -151,3 +151,8 @@ footer .container-fluid {
     background-image: linear-gradient(to right,#c30000,#3c0000) !important;
     color: white;
 }
+
+
+.card-img, .card-img-top{
+    max-height:250px;
+}
