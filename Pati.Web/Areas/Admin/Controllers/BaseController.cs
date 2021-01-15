@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Pati.Web.Areas.Admin.Controllers
 {
-   /* [JwtAuthorize]*/
+    [JwtAuthorize]
     [Area(AreaConsts.Admin)]
     public class BaseController : Controller
     {

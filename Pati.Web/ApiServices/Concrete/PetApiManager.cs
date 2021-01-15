@@ -27,17 +27,17 @@ namespace Pati.Web.ApiServices.Concrete
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<IResult> Add(PetDto dto)
+        public async Task<IDataResult<string>> Add(PetDto dto)
         {
 
             var postData = JsonConvert.SerializeObject(dto);
             
-            var content = new StringContent(postData, Encoding.UTF8, "application/json");
+            var content = new StringContent(postData, Encoding.UTF8,ContentTypes.JSON);
 
             var token = _httpContextAccessor.HttpContext.Session.GetString("token");
 
             if (string.IsNullOrEmpty(token))
-                return new ErrorResult("Unauthorized.");
+                return new DataResult<string>("Unauthorized.",false,System.Net.HttpStatusCode.NotFound);
 
             _httpClient.AddJwtTokenToHeader(token);
 
@@ -45,11 +45,40 @@ namespace Pati.Web.ApiServices.Concrete
 
             if (response.IsSuccessStatusCode)
             {
+                return new DataResult<string>(await response.Content.ReadAsStringAsync(), true, System.Net.HttpStatusCode.NotFound);
+            }
+            else
+            {
+                return new DataResult<string>(await response.Content.ReadAsStringAsync(), false, System.Net.HttpStatusCode.NotFound);
+            }
+        }
+
+        public async Task<IResult> AddImageToPet(int petId, string fileName)
+        {
+            var query = new Dictionary<string, string>
+            {
+                ["PetId"] = petId.ToString(),
+                ["PictureUrl"] = fileName
+            };
+            var content = new StringContent(JsonConvert.SerializeObject(query), Encoding.UTF8, ContentTypes.JSON);
+
+
+
+   /*         var token = _httpContextAccessor.HttpContext.Session.GetString("token");
+
+            if (string.IsNullOrEmpty(token))
+                return new DataResult<string>("Unauthorized.", false, System.Net.HttpStatusCode.NotFound);
+
+            _httpClient.AddJwtTokenToHeader(token);*/
+
+            var response = await _httpClient.PostAsync("photo",content);
+            if (response.IsSuccessStatusCode)
+            {
                 return new Result();
             }
             else
             {
-                return new ErrorResult(await response.Content.ReadAsStringAsync());
+                return new Result(false);
             }
         }
 
@@ -117,7 +146,7 @@ namespace Pati.Web.ApiServices.Concrete
 
             var postData = JsonConvert.SerializeObject(dto);
 
-            var content = new StringContent(postData, Encoding.UTF8, "application/json");
+            var content = new StringContent(postData, Encoding.UTF8, ContentTypes.JSON);
 
             var token = _httpContextAccessor.HttpContext.Session.GetString("token");
 

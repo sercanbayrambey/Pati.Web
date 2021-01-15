@@ -21,6 +21,7 @@ namespace Pati.Web.ExtensionMethods
             services.AddHttpClient<IShelterApiService, ShelterApiManager>();
             services.AddHttpClient<IUserApiService, UserApiManager>();
             services.AddHttpClient<IAuthService, AuthManager>();
+            services.AddHttpClient<IContactService, ContactManager>();
 
             services.AddScoped<IFileService, FileManager>();
 

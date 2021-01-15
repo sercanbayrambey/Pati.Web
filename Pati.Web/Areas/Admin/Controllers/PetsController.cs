@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Pati.Web.ApiServices.Interfaces;
 using Pati.Web.Dtos;
@@ -47,12 +48,18 @@ namespace Pati.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(PetDto dto)
+        public async Task<IActionResult> Add(PetDto dto,List<IFormFile> Files)
         {
             var result = await _petApiService.Add(dto);
             if (result.Success)
             {
-                await _fileService.UploadFile(dto.Files);
+                var addedPetId = Int32.Parse(result.Data);
+                var fileNames = await _fileService.UploadFile(Files);
+                foreach (var item in fileNames)
+                {
+                    await _petApiService.AddImageToPet(addedPetId, item);
+
+                }
                 Alert("Ekleme işlemi başarılı.");
                 return RedirectToAction("Index");
 

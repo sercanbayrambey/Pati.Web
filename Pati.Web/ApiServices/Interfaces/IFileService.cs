@@ -10,8 +10,7 @@ namespace Pati.Web.ApiServices.Interfaces
     public interface IFileService
     {
         Task<string> GenerateFileName(string prefix);
-        Task UploadFile(List<IFormFile> files);
+        Task<List<string>> UploadFile(List<IFormFile> files);
         Task<byte[]> ConvertToByte(IFormFile formFile);
-      
     }
 }

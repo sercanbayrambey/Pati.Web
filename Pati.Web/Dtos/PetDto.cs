@@ -2,8 +2,6 @@
 using Pati.Web.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Pati.Web.Dtos
 {
@@ -21,7 +19,7 @@ namespace Pati.Web.Dtos
         public bool HasPassport { get; set; }
         public string Genus { get; set; }
         public PetGender PetGender { get; set; }
-        public List<IFormFile> Files { get; set; }
+        public IEnumerable<string> Images { get; set; }
 
     }
 }

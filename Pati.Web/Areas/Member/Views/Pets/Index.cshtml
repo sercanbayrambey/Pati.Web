@@ -136,7 +136,7 @@
                                 <li class="list-group-item font-weight-bold">Yaş: @(Convert.ToInt32(DateTime.Now.Subtract(item.PetBirthDate).Days / (365.25 / 12)))</li>
                             </ul>
                             <div class="card-body">
-                                <a asp-action="Details" asp-route-id="@item.PetId" class="btn btn-primary btn-block">Detaylar</a>
+                                <a asp-action="Details" asp-route-id="@item.PetId" class="btn btn-danger btn-block">Detaylar</a>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Pati.Web.ApiServices.Interfaces;
+using Pati.Web.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,19 +18,13 @@ namespace Pati.Web.ApiServices.Concrete
             var extension = fileName.Split(".")[1];
             var name = fileName.Split(".")[0];
             name += "_" + DateTime.Now.ToString();
-            name = ConvertToBase64(name);
+            name = SHA1.Generate(name);
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append(name);
             stringBuilder.Append(".");
             stringBuilder.Append(extension);
 
             return stringBuilder.ToString();
-        }
-
-        private string ConvertToBase64(string str)
-        {
-            var plainTextBytes = Encoding.UTF8.GetBytes(str);
-            return Convert.ToBase64String(plainTextBytes);
         }
 
         public async Task<byte[]> ConvertToByte(IFormFile formFile)
@@ -39,12 +34,15 @@ namespace Pati.Web.ApiServices.Concrete
             return stream.ToArray();
         }
 
-        public async Task UploadFile(List<IFormFile> files)
+        public async Task<List<string>> UploadFile(List<IFormFile> files)
         {
+            List<string> uploadedFileNames = new List<string>();
+
             foreach (var item in files)
             {
                 var fileContent = await ConvertToByte(item);
                 var fileName = await GenerateFileName(item.FileName);
+                uploadedFileNames.Add(fileName);
                 FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://ftp.taninticaret.net/images/pati/" + fileName);
                 request.Credentials = new NetworkCredential("u247404070.pati", "Pati2020");
                 request.Method = WebRequestMethods.Ftp.UploadFile;
@@ -56,6 +54,8 @@ namespace Pati.Web.ApiServices.Concrete
                 }
 
             }
+
+            return uploadedFileNames;
         }
     }
 }

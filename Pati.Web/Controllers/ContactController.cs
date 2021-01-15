@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pati.Web.ApiServices.Concrete;
+using Pati.Web.ApiServices.Interfaces;
 using Pati.Web.Dtos;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,8 @@ namespace Pati.Web.Controllers
 {
     public class ContactController : BaseController
     {
-        private readonly ContactManager _contactManager;
-        public ContactController(ContactManager contactManager)
+        private readonly IContactService _contactManager;
+        public ContactController(IContactService contactManager)
         {
             _contactManager = contactManager;    
         }
