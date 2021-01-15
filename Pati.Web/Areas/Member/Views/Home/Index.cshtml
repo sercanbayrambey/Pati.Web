@@ -168,43 +168,8 @@
         </div>
     </section>
 
-    <section id="contact" class="generic dark-bg">
-        <div class="container">
-            <h2 class="display-5 text-danger mb-5">Bize Ulaşın</h2>
 
-            <div class="col">
-                <form class="row">
-                    <div class="col-6">
-                        <div class="input group">
-                            <input type="text" class="form-control rounded-0 border-danger text-white bg-transparent"
-                                   placeholder="Ad:*" required>
-                        </div>
-                    </div>
-
-                    <div class="col-6">
-                        <div class="input group">
-                            <input type="text" class="form-control rounded-0 border-danger text-white bg-transparent"
-                                   placeholder="E-mail:*" required>
-                        </div>
-                    </div>
-
-                    <div class="col-12 py-4">
-                        <div class="input group">
-                            <textarea class="form-control rounded-0 border-danger text-white bg-transparent"
-                                      placeholder="Mesajınızı Girin:*" rows="5" required></textarea>
-                        </div>
-                    </div>
-
-                    <div class="d-grid ml-3">
-                        <button type="submit" class="btn btn-outline-danger rounded-0 text-uppercase">
-                            gönder
-                        </button>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-    </section>
+    @await Component.InvokeAsync("ContactForm")
 
 
     <footer class="pd-5 bg-danger text-white text-center">

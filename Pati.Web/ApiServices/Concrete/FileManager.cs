@@ -16,15 +16,20 @@ namespace Pati.Web.ApiServices.Concrete
         {
             var extension = fileName.Split(".")[1];
             var name = fileName.Split(".")[0];
-
+            name += "_" + DateTime.Now.ToString();
+            name = ConvertToBase64(name);
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append(name);
-            stringBuilder.Append("_");
-            stringBuilder.Append(DateTime.Now.ToString());
             stringBuilder.Append(".");
             stringBuilder.Append(extension);
 
             return stringBuilder.ToString();
+        }
+
+        private string ConvertToBase64(string str)
+        {
+            var plainTextBytes = Encoding.UTF8.GetBytes(str);
+            return Convert.ToBase64String(plainTextBytes);
         }
 
         public async Task<byte[]> ConvertToByte(IFormFile formFile)

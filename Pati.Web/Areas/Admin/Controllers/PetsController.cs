@@ -49,13 +49,10 @@ namespace Pati.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(PetDto dto)
         {
-            
-
-            await _fileService.UploadFile(dto.Files);
-
             var result = await _petApiService.Add(dto);
             if (result.Success)
             {
+                await _fileService.UploadFile(dto.Files);
                 Alert("Ekleme işlemi başarılı.");
                 return RedirectToAction("Index");
 
@@ -63,7 +60,7 @@ namespace Pati.Web.Areas.Admin.Controllers
             else
             {
                 Alert("Ekleme işlemi başarısız." + result.Message);
-                return View(dto);
+                return View("AddOrUpdate", dto);
             }
         }
 
