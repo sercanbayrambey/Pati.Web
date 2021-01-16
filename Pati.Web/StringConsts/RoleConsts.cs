@@ -7,8 +7,7 @@ namespace Pati.Web.StringConsts
 {
     public static class RoleConsts
     {
-        public const string AdminOnly = "admin";
-        public const string ModOnly = "admin,moderator";
-        public const string MemberOnly = "admin,moderator,member";
+        public const string Admin = "1";
+        public const string Mod = "1,2";
     }
 }

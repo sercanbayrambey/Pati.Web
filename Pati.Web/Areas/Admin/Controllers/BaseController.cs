@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Pati.Web.Areas.Admin.Controllers
 {
-    [JwtAuthorize]
+    [JwtAuthorize(Roles = RoleConsts.Mod)]
     [Area(AreaConsts.Admin)]
     public class BaseController : Controller
     {
@@ -17,6 +17,13 @@ namespace Pati.Web.Areas.Admin.Controllers
         {
             string msg = @"<script type='text/javascript'>$.notify({message: '" + message +
                          "'}, {timer: 1000,placement: {from: 'top',align:'center'}});</script>";
+            TempData["notification"] = msg;
+        }
+
+        public void ErrorAlert(string message)
+        {
+            string msg = @"<script type='text/javascript'>$.notify({message: '" + message +
+                         "'}, {timer: 1000,type:'danger',placement: {from: 'top',align:'center'}});</script>";
             TempData["notification"] = msg;
         }
 

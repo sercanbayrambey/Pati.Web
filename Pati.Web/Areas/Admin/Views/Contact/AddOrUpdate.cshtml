@@ -1,0 +1,134 @@
+﻿@model UserDto
+
+@{
+    var isEdit = Model.UserId > 0;
+    var title = isEdit ? "Kullanıcıyı DÜzenle" : "Yeni Kullanıcı Ekle";
+}
+
+
+@{
+    ViewData["Title"] = title;
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="card card-user">
+    <div class="card-header">
+        <h5 class="card-title">@title</h5>
+    </div>
+    <div class="card-body">
+        <form asp-action="@(isEdit ? "Update" : "Add")" asp-controller="User" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-12">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>E-Posta:</label>
+                                <input type="email" class="form-control" asp-for="UserMail" required />
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Şifre:</label>
+                                <input type="password" class="form-control" asp-for="Password" required />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Şifre Tekrar:</label>
+                                <input type="password" class="form-control" asp-for="ConfirmPassword" required />
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Ad:</label>
+                                <input type="text" class="form-control" asp-for="UserFirstName" required />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Soyad:</label>
+                                <input type="text" class="form-control" asp-for="UserLastName" required />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Telefon:</label>
+                                <input type="tel" class="form-control" asp-for="UserPhoneNumber" maxlength="11" required />
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Şehir:</label>
+                                <select name="City" required class="form-control city-select">
+                                    <option value="0">Seçiniz</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>İlçe:</label>
+                                <select name="CountyId" required class="form-control county-select">
+                                    <option value="0">Seçiniz</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Cinsiyet:</label>
+                                <select asp-for="UserSex" required class="form-control">
+                                    <option value="0">Kadın</option>
+                                    <option value="1">Erkek</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Doğum Günü:</label>
+                                <input class="form-control" value="@(isEdit ?  Model.UserBirthDate.Date.ToString("yyyy-MM-dd") :  DateTime.Today.ToString("yyyy-MM-dd"))" type="date" required asp-for="UserBirthDate" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Rol:</label>
+                                <select asp-for="UserRole" required class="form-control">
+                                    <option value="0">Üye</option>
+                                    <option value="1">Admin</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success pull-left">Kaydet</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="~/admin/js/cityCounty.js"></script>
+

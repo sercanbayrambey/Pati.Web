@@ -2,7 +2,7 @@
 
 @{
     var isEdit = Model.PetId > 0;
-    var title = isEdit ? "Hayvanı DÜzenle" : "Yeni Hayvan Ekle";
+    var title = isEdit ? "Hayvanı Düzenle" : "Yeni Hayvan Ekle";
 }
 
 
@@ -25,8 +25,7 @@
                     <div class="row">
 
                         <input type="hidden" value="@Model.PetId" asp-for="PetId" />
-                        <input type="hidden" value="1" asp-for="ShelterId" />
-                        <input type="hidden" value="1" asp-for="SpeciesId" />
+                        <input type="hidden" value="1"  asp-for="ShelterId" />
 
                         <div class="col-sm-4">
                             <div class="form-group">
@@ -38,7 +37,7 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Doğum Tarihi</label>
-                                <input type="date" asp-for="@Model.PetBirthDate" value="@(isEdit ?  Model.PetBirthDate.ToString("dd-MM-yyyy") :  DateTime.Today.ToString("dd-MM-yyyy"))" class="form-control form-control-bordered" />
+                                <input type="date" asp-for="@Model.PetBirthDate" value="@(isEdit ?  Model.PetBirthDate.Date.ToString("yyyy-MM-dd") :  DateTime.Today.ToString("yyyy-MM-dd"))" class="form-control form-control-bordered" />
                             </div>
                         </div>
 
@@ -80,10 +79,11 @@
                         </div>
 
 
+
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="petImages">Resimler</label>
-                                <input type="file"  multiple name="Files"  />
+                                <input type="file" multiple name="Files" />
                             </div>
                         </div>
 
@@ -112,8 +112,4 @@
         </form>
     </div>
 </div>
-
-
-
-
 

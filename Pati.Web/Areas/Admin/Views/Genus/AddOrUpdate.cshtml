@@ -1,0 +1,45 @@
+﻿@model GenusDto
+
+@{
+    var isEdit = Model.GenusId > 0;
+    var title = isEdit ? "Türü DÜzenle" : "Yeni Tür Ekle";
+}
+
+
+@{
+    ViewData["Title"] = title;
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card card-user">
+    <div class="card-header">
+        <h5 class="card-title">@title</h5>
+    </div>
+    <div class="card-body">
+        <form asp-action="@(isEdit ? "Update" : "Add")" asp-controller="Genus" method="post">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Tür Adı:</label>
+                                <input type="text" class="form-control" asp-for="GenusName" required />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success pull-left">Kaydet</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+

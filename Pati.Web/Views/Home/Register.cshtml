@@ -9,21 +9,13 @@
 
     <div class="row">
 
-        <div class="col-sm-6">
+        <div class="col-sm-12">
             <div class="form-group">
                 <label>E-Posta:</label>
                 <input type="email" class="form-control" asp-for="UserMail" required />
             </div>
         </div>
 
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label>Telefon:</label>
-                <input type="tel" class="form-control" asp-for="UserPhoneNumber" maxlength="11" required />
-            </div>
-        </div>
-
-     
 
         <div class="col-sm-6">
             <div class="form-group">
@@ -40,14 +32,14 @@
         </div>
 
 
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="form-group">
                 <label>Ad:</label>
                 <input type="text" class="form-control" asp-for="UserFirstName" required />
             </div>
         </div>
 
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="form-group">
                 <label>Soyad:</label>
                 <input type="text" class="form-control" asp-for="UserLastName" required />
@@ -55,29 +47,47 @@
         </div>
 
         <div class="col-sm-4">
+            <div class="form-group">
+                <label>Telefon:</label>
+                <input type="tel" class="form-control" asp-for="UserPhoneNumber" maxlength="11" required />
+            </div>
+        </div>
 
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Şehir:</label>
+                <select name="City" required class="form-control city-select">
+                    <option value="0">Seçiniz</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>İlçe:</label>
+                <select name="CountyId" required class="form-control county-select">
+                    <option value="0">Seçiniz</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="col-sm-6">
             <div class="form-group">
                 <label>Cinsiyet:</label>
-                <select asp-for="UserSex" class="form-control">
+                <select asp-for="UserSex" required class="form-control">
                     <option value="0">Kadın</option>
                     <option value="1">Erkek</option>
                 </select>
             </div>
         </div>
 
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label>Location:</label>
-                <select asp-for="UserLocation" class="form-control">
-                    <option value="6">Ankara</option>
-                </select>
-            </div>
-        </div>
 
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div class="form-group">
                 <label>Doğum Günü:</label>
-                <input class="form-control" type="date" asp-for="UserBirthDate" />
+                <input class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" type="date" required asp-for="UserBirthDate" />
             </div>
         </div>
 
@@ -92,3 +102,4 @@
 </form>
 
 
+<script src="~/admin/js/cityCounty.js"></script>

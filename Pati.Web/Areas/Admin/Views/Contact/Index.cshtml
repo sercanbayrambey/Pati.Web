@@ -1,0 +1,90 @@
+﻿@model List<ContactDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header card-header-primary">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h4 class="card-title ">Mesajlar</h4>
+                    <p class="card-category">Buradan sisteme gelen mesajları görebilirsiniz.</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" id="messagesBody">
+            <div class="table-responsive table-hover">
+                <table class="table messages">
+                    <thead class=" text-info">
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th>Tarih</th>
+                            <th>İsim</th>
+                            <th>
+                                E-Mail
+                            </th>
+                            <th>
+                                Mesaj
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr data-toggle="modal" data-target="#messageDetails-@item.Id">
+                                <td>@item.Id</td>
+                                <td>@item.Date</td>
+                                <td>@item.Name</td>
+                                <td>@item.Email</td>
+                                <td class="message"><div>@item.Message</div></td>
+                            </tr>
+
+                            <div class="modal fade contactDetails" id="messageDetails-@item.Id" tabindex="-1" role="dialog" aria-labelledby="messageDetails" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Contact Details</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <strong>İsim:</strong> @item.Name
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <strong>Email:</strong> @item.Email
+                                                </div>
+                                            </div>
+                                            <div class="mt-4 border-top border-dark">
+                                                <div class="mt-4">
+                                                    <strong>Mesaj:</strong>
+                                                    <textarea disabled  rows="8" class="message-details form-control form-control-bordered">@item.Message</textarea>
+                                                </div>
+                                                <div class="text-muted">@item.Date</div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

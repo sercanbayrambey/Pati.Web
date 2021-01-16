@@ -87,3 +87,28 @@ input:checked + .slider:before {
 }
 
 /* end of bootstrap switch size alternative - md */
+
+#messagesBody .modal-dialog {
+    max-width: 900px;
+    height: 500px;
+}
+
+#messagesBody .modal-content{
+    height:500px;
+}
+
+
+#messagesBody .modal-dialog textarea[disabled]{
+    background-color: white;
+    cursor:default;
+}
+table.messages .message-details {
+    background-color: transparent;
+}
+
+table.messages td.message div {
+    width:800px!important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

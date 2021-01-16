@@ -1,64 +1,49 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Pati.Web.ApiServices.Interfaces;
 using Pati.Web.Dtos;
-using Pati.Web.Utilities;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using X.PagedList;
 
 namespace Pati.Web.Areas.Admin.Controllers
 {
-    public class PetsController : BaseController
+    public class GenusController : BaseController
     {
-        private readonly IPetApiService _petApiService;
-        private readonly IFileService _fileService;
-        public PetsController(IPetApiService petApiService, IFileService fileService)
+        private readonly IGenusService _genusService;
+        public GenusController(IGenusService genusService)
         {
-            _petApiService = petApiService;
-            _fileService = fileService;
+            _genusService = genusService;
         }
-        public async Task<IActionResult> Index(int p = 1)
+        public async Task<IActionResult> Index()
         {
-            var response = await _petApiService.List(p,false);
+            var response = await _genusService.List();
             if (response.Success)
             {
-                var dataCount = await _petApiService.GetPetCount();
-                var dtoList = new StaticPagedList<PetDto>(response.Data, p, 21, dataCount.Data);
 
-                return View(dtoList);
+                return View(response.Data);
             }
             else
             {
-                return View(new PagedList<PetDto>(new List<PetDto>(), p, StaticVars.PaginationPageSize));
+                ErrorAlert(response.Message);
+                return RedirectToAction("Index", "Home");
             }
         }
 
 
         public async Task<IActionResult> Add()
         {
-            var dto = new PetDto();
+            var dto = new GenusDto();
 
             return View("AddOrUpdate", dto);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(PetDto dto,List<IFormFile> Files)
+        public async Task<IActionResult> Add(GenusDto dto)
         {
-            var result = await _petApiService.Add(dto);
+            var result = await _genusService.Add(dto);
             if (result.Success)
             {
-                var addedPetId = Int32.Parse(result.Data);
-                var fileNames = await _fileService.UploadFile(Files);
-                foreach (var item in fileNames)
-                {
-                    await _petApiService.AddImageToPet(addedPetId, item);
-
-                }
                 Alert("Ekleme işlemi başarılı.");
                 return RedirectToAction("Index");
 
@@ -72,7 +57,7 @@ namespace Pati.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Update(int id)
         {
-            var result = await _petApiService.GetById(id);
+            var result = await _genusService.GetById(id);
             if (result.Success)
             {
                 return View("AddOrUpdate", result.Data);
@@ -85,13 +70,13 @@ namespace Pati.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(PetDto dto)
+        public async Task<IActionResult> Update(GenusDto dto)
         {
-            var result = await _petApiService.Update(dto);
+            var result = await _genusService.Update(dto);
             if (result.Success)
             {
                 Alert("Güncelleme işlemi başarılı.");
-                return RedirectToAction("Update", dto.PetId);
+                return RedirectToAction("Update", dto.GenusId);
 
             }
             else
@@ -103,7 +88,7 @@ namespace Pati.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await _petApiService.Delete(id);
+            var result = await _genusService.Delete(id);
             if (result.Success)
             {
                 Alert("Silme işlemi başarılı.");
@@ -115,8 +100,6 @@ namespace Pati.Web.Areas.Admin.Controllers
 
             return RedirectToAction("Index");
         }
-
-
 
     }
 }

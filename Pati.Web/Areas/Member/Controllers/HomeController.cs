@@ -12,7 +12,7 @@ namespace Pati.Web.Areas.Member.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Pets");
         }
      
     }

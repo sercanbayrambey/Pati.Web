@@ -43,6 +43,8 @@ namespace Pati.Web.ApiServices.Concrete
             {
                 _httpContextAccessor.HttpContext.Session.SetString("token", responseContent);
                 var activeUser = await GetActiveUser();
+                if(!activeUser.Success)
+                    return new Result(false, response.StatusCode, activeUser.Message);
                 await Login(activeUser.Data);
                 return new Result();
             }

@@ -8,8 +8,8 @@ namespace Pati.Web.Dtos
     public class PetDto
     {
         public int PetId { get; set; }
-        public int ShelterId { get; set; }
-        public int SpeciesId { get; set; }
+        public int? ShelterId { get; set; }
+        public int? SpeciesId { get; set; }
         public string PetName { get; set; }
         public string PetWeight { get; set; }
         public string PetHeight { get; set; }
@@ -20,6 +20,8 @@ namespace Pati.Web.Dtos
         public string Genus { get; set; }
         public PetGender PetGender { get; set; }
         public List<string> Images { get; set; }
+        public int CountyId { get; set; }
+
 
     }
 }

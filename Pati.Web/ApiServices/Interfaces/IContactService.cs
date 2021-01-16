@@ -10,5 +10,6 @@ namespace Pati.Web.ApiServices.Interfaces
     public interface IContactService
     {
         Task<IResult> Send(ContactDto contactDto);
+        Task<IDataResult<List<ContactDto>>> List();
     }
 }

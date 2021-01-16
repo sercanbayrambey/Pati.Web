@@ -22,6 +22,7 @@ namespace Pati.Web.ExtensionMethods
             services.AddHttpClient<IUserApiService, UserApiManager>();
             services.AddHttpClient<IAuthService, AuthManager>();
             services.AddHttpClient<IContactService, ContactManager>();
+            services.AddHttpClient<IGenusService, GenusManager>();
 
             services.AddScoped<IFileService, FileManager>();
 

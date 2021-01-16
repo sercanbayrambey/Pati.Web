@@ -1,0 +1,55 @@
+﻿@model List<GenusDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header card-header-primary">
+            <div class="row">
+                <div class="col-sm-10">
+                    <h4 class="card-title ">Türler</h4>
+                    <p class="card-category">Buradan sistemde kayıtlı türleri yönetebilirsiniz.</p>
+                </div>
+                <div class="col-sm-2">
+                    <a class="btn btn-success pull-right" asp-action="Add">Yeni Tür Ekle</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive table-hover">
+                <table class="table">
+                    <thead class=" text-info">
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                Tür Adı
+                            </th>
+                            <th>#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.GenusId</td>
+                                <td>@item.GenusName</td>
+                                <td>
+                                    <a class="btn btn-warning" asp-action="Update" asp-route-id="@item.GenusId" asp-controller="Genus"><i class="fas fa-edit mr-2"></i>Düzenle</a>
+                                    <a class="btn btn-danger" onclick="return confirm('Silmek istediğinizden emin misiniz?');" asp-action="Delete" asp-controller="Genus" asp-route-id="@item.GenusId"><i class="fas fa-trash-alt mr-2"></i>Sil</a>
+                                </td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
