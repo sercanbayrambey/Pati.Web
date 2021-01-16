@@ -20,7 +20,7 @@
         <form asp-action="@(isEdit ? "Update" : "Add")" asp-controller="Genus" method="post">
             <div class="row">
                 <div class="col-md-12">
-
+                    <input type="hidden" value="@Model.GenusId" asp-for="@Model.GenusId" />
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">

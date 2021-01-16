@@ -90,6 +90,14 @@ namespace Pati.Web.ApiServices.Concrete
                 ["id"] = id.ToString()
             };
 
+            var token = _httpContextAccessor.HttpContext.Session.GetString("token");
+
+            if (string.IsNullOrEmpty(token))
+                return new ErrorResult("Unauthorized.");
+
+
+            _httpClient.AddJwtTokenToHeader(token);
+
             var response = await _httpClient.DeleteAsync(QueryHelpers.AddQueryString("", query));
             if (response.IsSuccessStatusCode)
             {

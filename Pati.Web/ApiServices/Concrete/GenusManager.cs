@@ -58,6 +58,15 @@ namespace Pati.Web.ApiServices.Concrete
                 ["id"] = id.ToString()
             };
 
+
+            var token = _httpContextAccessor.HttpContext.Session.GetString("token");
+
+            if (string.IsNullOrEmpty(token))
+                return new ErrorResult("Unauthorized.");
+
+
+            _httpClient.AddJwtTokenToHeader(token);
+
             var response = await _httpClient.DeleteAsync(QueryHelpers.AddQueryString("admin/genus", query));
             if (response.IsSuccessStatusCode)
             {
@@ -69,9 +78,31 @@ namespace Pati.Web.ApiServices.Concrete
             }
         }
 
-        public Task<IDataResult<GenusDto>> GetById(int id)
+        public async Task<IDataResult<GenusDto>> GetById(int id)
         {
-            throw new NotImplementedException();
+            var query = new Dictionary<string, string>
+            {
+                ["id"] = id.ToString()
+            };
+
+            var token = _httpContextAccessor.HttpContext.Session.GetString("token");
+
+            if (string.IsNullOrEmpty(token))
+                return new DataResult<GenusDto>(null, false, System.Net.HttpStatusCode.Unauthorized);
+
+
+            _httpClient.AddJwtTokenToHeader(token);
+
+            var response = await _httpClient.GetAsync(QueryHelpers.AddQueryString("genus", query));
+            if (response.IsSuccessStatusCode)
+            {
+                var dto = JsonConvert.DeserializeObject<GenusDto>(await response.Content.ReadAsStringAsync());
+                return new DataResult<GenusDto>(dto, true, response.StatusCode);
+            }
+            else
+            {
+                return new DataResult<GenusDto>(null, false, response.StatusCode);
+            }
         }
 
         public async Task<IDataResult<List<GenusDto>>> List()
@@ -84,7 +115,7 @@ namespace Pati.Web.ApiServices.Concrete
 
             _httpClient.AddJwtTokenToHeader(token);
 
-            var response = await _httpClient.GetAsync("genus");
+            var response = await _httpClient.GetAsync("allGenuses");
             if (response.IsSuccessStatusCode)
             {
                 var dto = JsonConvert.DeserializeObject<List<GenusDto>>(await response.Content.ReadAsStringAsync());
@@ -113,7 +144,7 @@ namespace Pati.Web.ApiServices.Concrete
 
             _httpClient.AddJwtTokenToHeader(token);
 
-            var response = await _httpClient.PutAsync("genus", content);
+            var response = await _httpClient.PutAsync("admin/genus", content);
 
             if (response.IsSuccessStatusCode)
             {

@@ -31,9 +31,30 @@ namespace Pati.Web.ApiServices.Concrete
             return await RegisterAsync(dto);
         }
 
-        public Task<IResult> Delete(int id)
+        public async Task<IResult> Delete(int id)
         {
-            throw new NotImplementedException();
+            var query = new Dictionary<string, string>
+            {
+                ["id"] = id.ToString()
+            };
+
+            var token = _httpContextAccessor.HttpContext.Session.GetString("token");
+
+            if (string.IsNullOrEmpty(token))
+                return new ErrorResult("Unauthorized.");
+
+
+            _httpClient.AddJwtTokenToHeader(token);
+
+            var response = await _httpClient.DeleteAsync(QueryHelpers.AddQueryString("admin/user", query));
+            if (response.IsSuccessStatusCode)
+            {
+                return new Result(true);
+            }
+            else
+            {
+                return new Result(await response.Content.ReadAsStringAsync(), false);
+            }
         }
 
         public async Task<IDataResult<UserDto>> GetById(int id)
