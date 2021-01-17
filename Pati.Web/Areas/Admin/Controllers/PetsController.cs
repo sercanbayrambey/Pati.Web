@@ -80,7 +80,7 @@ namespace Pati.Web.Areas.Admin.Controllers
             }
             else
             {
-                Alert("Pet bulunamadı." + result.Message);
+                Alert("Bir hata oluştu." + result.Message);
                 return RedirectToAction("Index");
             }
         }

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Pati.Web.ApiServices.Interfaces;
 using Pati.Web.Dtos;
 using System;
@@ -9,20 +8,19 @@ using System.Threading.Tasks;
 
 namespace Pati.Web.Areas.Admin.Controllers
 {
-    public class SpeciesController: BaseController
+    public class ShelterController : BaseController
     {
-        private readonly ISpeciesService _speciesService;
-        private readonly IGenusService _genusService;
-        public SpeciesController(ISpeciesService speciesService, IGenusService genusService)
+        private readonly IShelterApiService _shelterService;
+        public ShelterController(IShelterApiService shelterService)
         {
-            _speciesService = speciesService;
-            _genusService = genusService;
+            _shelterService = shelterService;
         }
         public async Task<IActionResult> Index()
         {
-            var response = await _speciesService.List();
+            var response = await _shelterService.List();
             if (response.Success)
             {
+
                 return View(response.Data);
             }
             else
@@ -35,16 +33,15 @@ namespace Pati.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Add()
         {
-            var dto = new SpeciesDto();
-            GenerateViewbags(dto);
+            var dto = new ShelterDto();
 
             return View("AddOrUpdate", dto);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(SpeciesDto dto)
+        public async Task<IActionResult> Add(ShelterDto dto)
         {
-            var result = await _speciesService.Add(dto);
+            var result = await _shelterService.Add(dto);
             if (result.Success)
             {
                 Alert("Ekleme işlemi başarılı.");
@@ -54,17 +51,15 @@ namespace Pati.Web.Areas.Admin.Controllers
             else
             {
                 ErrorAlert("Ekleme işlemi başarısız." + result.Message);
-                GenerateViewbags(dto);
                 return View("AddOrUpdate", dto);
             }
         }
 
         public async Task<IActionResult> Update(int id)
         {
-            var result = await _speciesService.GetById(id);
+            var result = await _shelterService.GetById(id);
             if (result.Success)
             {
-                GenerateViewbags(result.Data);
                 return View("AddOrUpdate", result.Data);
             }
             else
@@ -75,26 +70,25 @@ namespace Pati.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(SpeciesDto dto)
+        public async Task<IActionResult> Update(ShelterDto dto)
         {
-            var result = await _speciesService.Update(dto);
+            var result = await _shelterService.Update(dto);
             if (result.Success)
             {
                 Alert("Güncelleme işlemi başarılı.");
-                return RedirectToAction("Update", dto.GenusId);
+                return RedirectToAction("Update", dto.ShelterId);
 
             }
             else
             {
                 ErrorAlert("Güncelleme işlemi başarısız.: " + result.Message);
-                GenerateViewbags(dto);
                 return View("AddOrUpdate", dto);
             }
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await _speciesService.Delete(id);
+            var result = await _shelterService.Delete(id);
             if (result.Success)
             {
                 Alert("Silme işlemi başarılı.");
@@ -107,15 +101,10 @@ namespace Pati.Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        private void GenerateViewbags(SpeciesDto speciesDto)
-        {
-            ViewBag.Genusses = new SelectList(_genusService.List().Result.Data, "GenusId", "GenusName",speciesDto.GenusId);
-        }
-
         [HttpPost]
-        public async Task<IActionResult> GetSpecies(int genusId)
+        public async Task<IActionResult> GetGenusses()
         {
-            var response = await _speciesService.List(genusId);
+            var response = await _shelterService.List();
             if (response.Success)
             {
                 return Ok(response.Data);
