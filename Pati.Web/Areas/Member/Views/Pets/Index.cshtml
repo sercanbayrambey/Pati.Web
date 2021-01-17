@@ -17,100 +17,45 @@
             </div>
         </div>
 
-        <!--Akordiyon Filtreleme-->
         <div class="accordion" id="accordionExample">
             <div class="card">
                 <div class="card-header" id="headingOne">
-                    <h2 class="mb-0">
-                        <button type="button" class="btn btn-link" data-toggle="collapse" id="collapseFilter" data-target="#collapseOne"><i class="fa fa-plus"></i> CİNSLER</button>
-                    </h2>
+                    <h4 class="mb-0">
+                     <i class="fa fa-filter"></i> Filtrele
+                    </h4>
                 </div>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <div class="card-body">
-                        <div class="form-check border-bottom p-1 ml-2">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Kedi
-                            </label>
-                        </div>
-                        <div class="form-check  border-bottom p-1 ml-2">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Köpek
-                            </label>
-                        </div>
-                        <div class="form-check  border-bottom p-1 ml-2">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Kuş
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingTwo">
-                    <h2 class="mb-0">
-                        <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"><i class="fa fa-plus"></i> ######</button>
-                    </h2>
-                </div>
-                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                    <div class="card-body">
-                        <div class="form-check border-bottom p-1 ml-2">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
-                            </label>
-                        </div>
-                        <div class="form-check border-bottom p-1 ml-2">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
-                            </label>
-                        </div>
-                        <div class="form-check border-bottom p-1 ml-2">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h2 class="mb-0">
-                        <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"><i class="fa fa-plus"></i> ######</button>
-                    </h2>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                    <div class="card-body">
-                        <div class="form-check border-bottom p-1 ml-2">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
-                            </label>
-                        </div>
-                        <div class="form-check border-bottom p-1 ml-2">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
-                            </label>
-                        </div>
-                        <div class="form-check border-bottom p-1 ml-2">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Default checkbox
-                            </label>
-                        </div>
-                    </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush" id="myList">
+                        <li class="list-group-item">
+                            <h5> <a href="#" style="color:#212529;">Kedi</a> </h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">Siyam Kedisi</a> </li>
+                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">İran Kedisi</a> </li>
+                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">Ankara Kedisi</a> </li>
+                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">Van Kedisi</a> </li>
+                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">Scottish</a> </li>
+                            </ul>
+                        </li>
+
+                        <li class="list-group-item">
+                            <h5> <a href="#" style="color:#212529;">Köpek</a> </h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">Kangal</a> </li>
+                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">Pitbull Terrier</a> </li>
+                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">Sibirya Kurdu</a> </li>
+                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">Pug</a> </li>
+                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">Süs Köpeee</a> </li>
+                            </ul>
+                        </li>
+                    </ul>
+
                 </div>
             </div>
         </div>
     </div>
 
     <!--Barınaktaki Hayvanlar Card Sistemi-->
-    <div class="col-sm filter-row">
+    <div class="col-sm row filter-row">
 
         <div class="row  g-4">
             @if (Model.Count == 0)
