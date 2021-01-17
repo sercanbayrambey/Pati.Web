@@ -167,7 +167,7 @@ namespace Pati.Web.ApiServices.Concrete
             }
         }
 
-        public async Task<IDataResult<List<PetDto>>> List(int currentPage = 1, bool getImages = true, PetListParameters petListParameters)
+        public async Task<IDataResult<List<PetDto>>> List(PetListParameters petListParameters,int currentPage = 1, bool getImages = true)
         {
 
             var query = new Dictionary<string, string>
