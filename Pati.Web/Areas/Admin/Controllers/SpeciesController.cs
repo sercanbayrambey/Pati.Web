@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Pati.Web.ApiServices.Interfaces;
 using Pati.Web.Dtos;
 using System;
@@ -11,9 +12,11 @@ namespace Pati.Web.Areas.Admin.Controllers
     public class SpeciesController: BaseController
     {
         private readonly ISpeciesService _speciesService;
-        public SpeciesController(ISpeciesService speciesService)
+        private readonly IGenusService _genusService;
+        public SpeciesController(ISpeciesService speciesService, IGenusService genusService)
         {
             _speciesService = speciesService;
+            _genusService = genusService;
         }
         public async Task<IActionResult> Index()
         {
@@ -33,6 +36,7 @@ namespace Pati.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Add()
         {
             var dto = new SpeciesDto();
+            GenerateViewbags(dto);
 
             return View("AddOrUpdate", dto);
         }
@@ -50,6 +54,7 @@ namespace Pati.Web.Areas.Admin.Controllers
             else
             {
                 ErrorAlert("Ekleme işlemi başarısız." + result.Message);
+                GenerateViewbags(dto);
                 return View("AddOrUpdate", dto);
             }
         }
@@ -59,6 +64,7 @@ namespace Pati.Web.Areas.Admin.Controllers
             var result = await _speciesService.GetById(id);
             if (result.Success)
             {
+                GenerateViewbags(result.Data);
                 return View("AddOrUpdate", result.Data);
             }
             else
@@ -81,6 +87,7 @@ namespace Pati.Web.Areas.Admin.Controllers
             else
             {
                 ErrorAlert("Güncelleme işlemi başarısız.: " + result.Message);
+                GenerateViewbags(dto);
                 return View("AddOrUpdate", dto);
             }
         }
@@ -98,6 +105,11 @@ namespace Pati.Web.Areas.Admin.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        private void GenerateViewbags(SpeciesDto speciesDto)
+        {
+            ViewBag.Genusses = new SelectList(_genusService.List().Result.Data, "GenusId", "GenusName",speciesDto.GenusId);
         }
 
     }

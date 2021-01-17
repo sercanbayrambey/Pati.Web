@@ -38,10 +38,10 @@
                             <tr>
                                 <td>@item.SpeciesId</td>
                                 <td>@item.SpeciesName</td>
-                                <td>@item.GenusId</td>
+                                <td>@item.GenusName</td>
                                 <td>
-                                    <a class="btn btn-warning" asp-action="Update" asp-route-id="@item.SpeciesName" asp-controller="Species"><i class="fas fa-edit mr-2"></i>Düzenle</a>
-                                    <a class="btn btn-danger" onclick="return confirm('Silmek istediğinizden emin misiniz?');" asp-action="Delete" asp-controller="Species" asp-route-id="@item.SpeciesName"><i class="fas fa-trash-alt mr-2"></i>Sil</a>
+                                    <a class="btn btn-warning" asp-action="Update" asp-route-id="@item.SpeciesId" asp-controller="Species"><i class="fas fa-edit mr-2"></i>Düzenle</a>
+                                    <a class="btn btn-danger" onclick="return confirm('Silmek istediğinizden emin misiniz?');" asp-action="Delete" asp-controller="Species" asp-route-id="@item.SpeciesId"><i class="fas fa-trash-alt mr-2"></i>Sil</a>
                                 </td>
                             </tr>
                         }

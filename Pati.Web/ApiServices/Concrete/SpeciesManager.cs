@@ -20,12 +20,13 @@ namespace Pati.Web.ApiServices.Concrete
 
         private readonly HttpClient _httpClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
-        public SpeciesManager(HttpClient httpClient, IHttpContextAccessor httpContextAccessor)
+        private readonly IGenusService _genusService;
+        public SpeciesManager(HttpClient httpClient, IHttpContextAccessor httpContextAccessor, IGenusService genusService)
         {
             _httpClient = httpClient;
             _httpClient.BaseAddress = new Uri(StaticVars.BaseAPIAdress + "");
             _httpContextAccessor = httpContextAccessor;
+            _genusService = genusService;
         }
 
         public async Task<IResult> Add(SpeciesDto dto)
@@ -41,7 +42,7 @@ namespace Pati.Web.ApiServices.Concrete
 
             _httpClient.AddJwtTokenToHeader(token);
 
-            var response = await _httpClient.PostAsync("species", content);
+            var response = await _httpClient.PostAsync("admin/species", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -69,7 +70,7 @@ namespace Pati.Web.ApiServices.Concrete
 
             _httpClient.AddJwtTokenToHeader(token);
 
-            var response = await _httpClient.DeleteAsync(QueryHelpers.AddQueryString("species", query));
+            var response = await _httpClient.DeleteAsync(QueryHelpers.AddQueryString("admin/species", query));
             if (response.IsSuccessStatusCode)
             {
                 return new Result(true);
@@ -95,7 +96,7 @@ namespace Pati.Web.ApiServices.Concrete
 
             _httpClient.AddJwtTokenToHeader(token);
 
-            var response = await _httpClient.GetAsync(QueryHelpers.AddQueryString("species", query));
+            var response = await _httpClient.GetAsync(QueryHelpers.AddQueryString("getSpecies", query));
             if (response.IsSuccessStatusCode)
             {
                 var dto = JsonConvert.DeserializeObject<SpeciesDto>(await response.Content.ReadAsStringAsync());
@@ -121,6 +122,7 @@ namespace Pati.Web.ApiServices.Concrete
             if (response.IsSuccessStatusCode)
             {
                 var dto = JsonConvert.DeserializeObject<List<SpeciesDto>>(await response.Content.ReadAsStringAsync());
+                dto.ForEach(x => x.GenusName = _genusService.GetById(x.GenusId).Result.Data?.GenusName);
                 return new DataResult<List<SpeciesDto>>(dto, true, response.StatusCode);
             }
             else
@@ -146,7 +148,7 @@ namespace Pati.Web.ApiServices.Concrete
 
             _httpClient.AddJwtTokenToHeader(token);
 
-            var response = await _httpClient.PutAsync("species", content);
+            var response = await _httpClient.PutAsync("admin/species", content);
 
             if (response.IsSuccessStatusCode)
             {

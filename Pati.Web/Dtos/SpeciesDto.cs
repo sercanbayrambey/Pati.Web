@@ -10,6 +10,7 @@ namespace Pati.Web.Dtos
         public int SpeciesId { get; set; }
         public string SpeciesName { get; set; }
         public int GenusId { get; set; }
+        public string GenusName { get; set; }
 
     }
 }

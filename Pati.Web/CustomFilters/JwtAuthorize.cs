@@ -70,7 +70,7 @@ namespace Pati.Web.CustomFilters
             }
             else
             {
-                context.Result = new RedirectToActionResult("ApiError", "Home", new {statusCode = responseMessage.StatusCode.ToString() });
+                context.Result = new RedirectToActionResult("Index", "Home", new {area="",statusCode = responseMessage.StatusCode.ToString() });
             }
 
 
