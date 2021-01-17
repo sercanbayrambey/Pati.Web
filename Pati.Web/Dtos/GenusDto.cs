@@ -9,5 +9,6 @@ namespace Pati.Web.Dtos
     {
         public int GenusId { get; set; }
         public string GenusName { get; set; }
+        public IEnumerable<SpeciesDto> SpeciesDtos { get; set; }
     }
 }
