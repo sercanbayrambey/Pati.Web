@@ -156,3 +156,7 @@ footer .container-fluid {
 .card-img, .card-img-top{
     max-height:250px;
 }
+
+.filter-row .pet-container{
+    max-height:500px;
+}

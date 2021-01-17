@@ -21,11 +21,36 @@
             <div class="row">
                 <div class="col-md-12">
                     <input type="hidden" value="@Model.ShelterId" asp-for="@Model.ShelterId" />
+
+                    @if (isEdit)
+                    {
+                        <input type="hidden" class="current-city" value="@Model.CityId" />
+                        <input type="hidden" class="current-county" value="@Model.ShelterCountyId" />
+                    }
+
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>Barınak Adı:</label>
                                 <input type="text" class="form-control" asp-for="ShelterName" required />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Şehir:</label>
+                                <select name="City" required class="form-control form-control-bordered city-select">
+                                    <option value="0">Seçiniz</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>İlçe:</label>
+                                <select name="ShelterCountyId" required class="form-control form-control-bordered county-select">
+                                    <option value="0">Seçiniz</option>
+                                </select>
                             </div>
                         </div>
 
@@ -43,3 +68,5 @@
 </div>
 
 
+<script src="~/admin/js/cityCounty.js"></script>
+<script src="~/admin/js/fill.js"></script>

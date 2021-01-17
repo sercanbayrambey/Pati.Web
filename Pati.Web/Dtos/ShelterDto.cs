@@ -10,6 +10,7 @@ namespace Pati.Web.Dtos
         public int ShelterId { get; set; }
         public int ShelterCountyId { get; set; }
         public string ShelterName { get; set; }
+        public int CityId { get; set; }
 
     }
 }

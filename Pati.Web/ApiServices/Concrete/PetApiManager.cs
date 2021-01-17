@@ -187,9 +187,9 @@ namespace Pati.Web.ApiServices.Concrete
                     query.Add("speciesId", petListParameters.SpeciesId.Value.ToString());
                 }
 
-                if (string.IsNullOrWhiteSpace(petListParameters.SearchTerm))
+                if (!string.IsNullOrWhiteSpace(petListParameters.SearchTerm))
                 {
-                    query.Add("searchTerm", petListParameters.SpeciesId.Value.ToString());
+                    query.Add("searchTerm", petListParameters.SearchTerm.ToString());
                 }
             }
 

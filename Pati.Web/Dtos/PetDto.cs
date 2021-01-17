@@ -21,6 +21,8 @@ namespace Pati.Web.Dtos
         public PetGender PetGender { get; set; }
         public List<string> Images { get; set; }
         public int CountyId { get; set; }
+        public int GenusId { get; set; }
+
 
 
     }

@@ -121,7 +121,7 @@ namespace Pati.Web.ApiServices.Concrete
             if (response.IsSuccessStatusCode)
             {
                 var dto = JsonConvert.DeserializeObject<List<GenusDto>>(await response.Content.ReadAsStringAsync());
-                dto.ForEach(x => x.SpeciesDtos = _speciesService.List().Result.Data);
+                dto.ForEach(x => x.SpeciesDtos = _speciesService.List(x.GenusId).Result.Data);
                 return new DataResult<List<GenusDto>>(dto, true, response.StatusCode);
             }
             else

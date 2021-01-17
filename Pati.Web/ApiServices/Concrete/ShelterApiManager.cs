@@ -22,7 +22,7 @@ namespace Pati.Web.ApiServices.Concrete
         public ShelterApiManager(HttpClient httpClient, IHttpContextAccessor httpContextAccessor)
         {
             _httpClient = httpClient;
-            _httpClient.BaseAddress = new Uri(StaticVars.BaseAPIAdress + "admin");
+            _httpClient.BaseAddress = new Uri(StaticVars.BaseAPIAdress);
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -39,7 +39,7 @@ namespace Pati.Web.ApiServices.Concrete
 
             _httpClient.AddJwtTokenToHeader(token);
 
-            var response = await _httpClient.PostAsync("shelter", content);
+            var response = await _httpClient.PostAsync("admin/shelter", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -67,7 +67,7 @@ namespace Pati.Web.ApiServices.Concrete
 
             _httpClient.AddJwtTokenToHeader(token);
 
-            var response = await _httpClient.DeleteAsync(QueryHelpers.AddQueryString("", query));
+            var response = await _httpClient.DeleteAsync(QueryHelpers.AddQueryString("admin/shelter", query));
             if (response.IsSuccessStatusCode)
             {
                 return new Result(true);
@@ -93,7 +93,7 @@ namespace Pati.Web.ApiServices.Concrete
 
             _httpClient.AddJwtTokenToHeader(token);
 
-            var response = await _httpClient.GetAsync(QueryHelpers.AddQueryString("shelter", query));
+            var response = await _httpClient.GetAsync(QueryHelpers.AddQueryString("admin/shelter", query));
             if (response.IsSuccessStatusCode)
             {
                 var dto = JsonConvert.DeserializeObject<ShelterDto>(await response.Content.ReadAsStringAsync());
@@ -144,7 +144,7 @@ namespace Pati.Web.ApiServices.Concrete
 
             _httpClient.AddJwtTokenToHeader(token);
 
-            var response = await _httpClient.PutAsync("shelter", content);
+            var response = await _httpClient.PutAsync("admin/shelter", content);
 
             if (response.IsSuccessStatusCode)
             {

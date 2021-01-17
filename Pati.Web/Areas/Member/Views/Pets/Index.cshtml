@@ -17,10 +17,12 @@
     <div class="col-sm-3 filter-row">
         <!--Arama Çubuğu-->
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Arama Yap" aria-label="Arama Yap" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button">Ara</button>
-            </div>
+            <form class="w-100">
+                <div class="input-group-append">
+                    <input type="text" class="form-control" placeholder="Arama Yap" name="searchTerm" aria-label="Arama Yap" aria-describedby="basic-addon2">
+                    <button type="submit" class="btn btn-outline-secondary">Ara</button>
+                </div>
+            </form>
         </div>
 
         <div class="accordion" id="accordionExample">
@@ -58,51 +60,50 @@
     <!--Barınaktaki Hayvanlar Card Sistemi-->
     <div class="col-sm row filter-row">
 
-        <div class="row  g-4">
-            @if (Model.Count == 0)
+
+        @if (Model.Count == 0)
+        {
+            <div class="col-sm-12 mb-4">
+                <div class="alert-danger p-4 text-center my-2">Burada henüz bir şey yok :(</div>
+            </div>
+        }
+        else
+        {
+
+            @foreach (var item in Model)
             {
-                <div class="col-sm-12 justify-content-center">
-                    <div class="alert-info p-4 text-center my-2">Burada henüz bir şey yok :(</div>
+                <div class="col-sm-4 mb-4 pet-container">
+                    <div class="card shadow-lg h-100">
+                        <img src="@item.Images.FirstOrDefault()" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.PetName</h5>
+                            <p class="card-text">@item.PetAdditionInfo</p>
+                        </div>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item font-weight-bold">Cinsiyet: @item.PetGender.GetDisplayName()</li>
+                            <li class="list-group-item font-weight-bold">Yaş: @(Convert.ToInt32(DateTime.Now.Subtract(item.PetBirthDate).Days / (365.25 / 12)))</li>
+                            <a asp-action="Details" asp-route-id="@item.PetId" class="btn btn-danger btn-block">Detaylar</a>
+                        </ul>
+                    </div>
                 </div>
             }
-            else
-            {
-
-                @foreach (var item in Model)
-                {
-                    <div class="col-sm-4 mb-4">
-                        <div class="card h-100 shadow-lg">
-                            <img src="@item.Images.FirstOrDefault()" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">@item.PetName</h5>
-                                <p class="card-text">@item.PetAdditionInfo</p>
-                            </div>
-
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item font-weight-bold">Cinsiyet: @item.PetGender.GetDisplayName()</li>
-                                <li class="list-group-item font-weight-bold">Yaş: @(Convert.ToInt32(DateTime.Now.Subtract(item.PetBirthDate).Days / (365.25 / 12)))</li>
-                                <a asp-action="Details" asp-route-id="@item.PetId" class="btn btn-danger btn-block">Detaylar</a>
-                            </ul>
-                        </div>
-                    </div>
-                }
-            }
-
-        </div>
 
 
-        <div class="btn-toolbar mt-1 mb-3 justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
-            @Html.PagedListPager(Model,
-              page => Url.Action("Index", new { p = page }),
-              new X.PagedList.Web.Common.PagedListRenderOptionsBase
-                   {
-              DisplayLinkToIndividualPages = true,
-              DisplayPageCountAndCurrentLocation = false,
-              MaximumPageNumbersToDisplay = 10,
-              LiElementClasses = new string[] { "page-item" },
-                PageClasses = new string[] { "page-link" },
-             })
-        </div>
+            <div class="btn-toolbar mt-1 mb-3 col-sm-12 justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
+                @Html.PagedListPager(Model,
+                  page => Url.Action("Index", new { p = page }),
+                  new X.PagedList.Web.Common.PagedListRenderOptionsBase
+                       {
+                  DisplayLinkToIndividualPages = true,
+                  DisplayPageCountAndCurrentLocation = false,
+                  MaximumPageNumbersToDisplay = 10,
+                  LiElementClasses = new string[] { "page-item" },
+                    PageClasses = new string[] { "page-link" },
+                 })
+            </div>
+        }
+
 
     </div>
 </div>

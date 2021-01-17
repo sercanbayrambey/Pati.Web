@@ -18,6 +18,8 @@ namespace Pati.Web.Dtos
         public string Password { get; set; }
         public string UserRole { get; set; } = "0";
         public int CountyId { get; set; }
-         
+        public int CityId { get; set; }
+
+
     }
 }

@@ -25,7 +25,12 @@
                     <div class="row">
 
                         <input type="hidden" value="@Model.PetId" asp-for="PetId" />
-                        <input type="hidden" value="1" asp-for="ShelterId" />
+                        @if (isEdit)
+                        {
+                            <input type="hidden" class="pet-current-species" value="@Model.SpeciesId" />
+                            <input type="hidden" class="pet-current-genus" value="@Model.GenusId" />
+                        }
+
 
                         <div class="col-sm-4">
                             <div class="form-group">
@@ -46,6 +51,16 @@
                                 <label>Cinsiyeti:</label>
                                 <select class="form-control form-control-bordered" asp-for="PetGender" asp-items="Html.GetEnumSelectList<Pati.Web.Enums.PetGender>()">
                                     <option selected="selected" value="">Please select</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+
+                            <div class="form-group">
+                                <label>Barınak Seçiniz:</label>
+                                <select class="form-control form-control-bordered" asp-for="ShelterId" asp-items="ViewBag.Shelters" required>
+                                    <option value="0">Seçiniz.</option>
                                 </select>
                             </div>
                         </div>
@@ -132,3 +147,4 @@
 </div>
 
 <script src="~/admin/js/genusSpecies.js"></script>
+<script src="~/admin/js/fill.js"></script>

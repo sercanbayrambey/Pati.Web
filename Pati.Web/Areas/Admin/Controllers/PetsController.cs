@@ -18,10 +18,12 @@ namespace Pati.Web.Areas.Admin.Controllers
     {
         private readonly IPetApiService _petApiService;
         private readonly IFileService _fileService;
-        public PetsController(IPetApiService petApiService, IFileService fileService)
+        private readonly IShelterApiService _shelterApiService;
+        public PetsController(IPetApiService petApiService, IFileService fileService, IShelterApiService shelterApiService)
         {
             _petApiService = petApiService;
             _fileService = fileService;
+            _shelterApiService = shelterApiService;
         }
         public async Task<IActionResult> Index( int p = 1)
         {
@@ -43,7 +45,7 @@ namespace Pati.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Add()
         {
             var dto = new PetDto();
-
+            await GenerateViewBags(dto);
             return View("AddOrUpdate", dto);
         }
 
@@ -67,6 +69,7 @@ namespace Pati.Web.Areas.Admin.Controllers
             else
             {
                 Alert("Ekleme işlemi başarısız." + result.Message);
+                await GenerateViewBags(dto);
                 return View("AddOrUpdate", dto);
             }
         }
@@ -76,6 +79,7 @@ namespace Pati.Web.Areas.Admin.Controllers
             var result = await _petApiService.GetById(id);
             if (result.Success)
             {
+                await GenerateViewBags(result.Data);
                 return View("AddOrUpdate", result.Data);
             }
             else
@@ -97,6 +101,7 @@ namespace Pati.Web.Areas.Admin.Controllers
             }
             else
             {
+                await GenerateViewBags(dto);
                 Alert("Güncelleme işlemi başarısız.: " + result.Message);
                 return View("AddOrUpdate", dto);
             }
@@ -115,6 +120,11 @@ namespace Pati.Web.Areas.Admin.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        private async Task GenerateViewBags(PetDto dto)
+        {
+            ViewBag.Shelters = new SelectList(_shelterApiService.List().Result.Data, "ShelterId", "ShelterName", dto.ShelterId);
         }
 
 
