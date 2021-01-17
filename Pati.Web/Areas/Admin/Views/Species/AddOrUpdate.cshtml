@@ -1,8 +1,8 @@
-﻿@model GenusDto
+﻿@model SpeciesDto
 
 @{
     var isEdit = Model.GenusId > 0;
-    var title = isEdit ? "Cinsi DÜzenle" : "Yeni Cins Ekle";
+    var title = isEdit ? "Türü DÜzenle" : "Yeni Tür Ekle";
 }
 
 
@@ -17,7 +17,7 @@
         <h5 class="card-title">@title</h5>
     </div>
     <div class="card-body">
-        <form asp-action="@(isEdit ? "Update" : "Add")" asp-controller="Genus" method="post">
+        <form asp-action="@(isEdit ? "Update" : "Add")" asp-controller="Species" method="post">
             <div class="row">
                 <div class="col-md-12">
                     <input type="hidden" value="@Model.GenusId" asp-for="@Model.GenusId" />
@@ -25,7 +25,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>Cins Adı:</label>
-                                <input type="text" class="form-control" asp-for="GenusName" required />
+                                <input type="text" class="form-control" asp-for="SpeciesName" required />
                             </div>
                         </div>
 

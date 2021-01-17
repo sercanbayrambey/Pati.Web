@@ -8,45 +8,41 @@ using System.Threading.Tasks;
 
 namespace Pati.Web.Areas.Admin.Controllers
 {
-    public class UserController : BaseController
+    public class SpeciesController: BaseController
     {
-        private readonly IUserApiService _userApiService;
-        public UserController(IUserApiService userApiService)
+        private readonly ISpeciesService _speciesService;
+        public SpeciesController(ISpeciesService speciesService)
         {
-            _userApiService = userApiService;
+            _speciesService = speciesService;
         }
-
-
         public async Task<IActionResult> Index()
         {
-            var response = await _userApiService.List();
+            var response = await _speciesService.List();
             if (response.Success)
             {
-
                 return View(response.Data);
             }
             else
             {
                 ErrorAlert(response.Message);
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Home");
             }
         }
 
 
         public async Task<IActionResult> Add()
         {
-            var dto = new UserDto();
+            var dto = new SpeciesDto();
 
             return View("AddOrUpdate", dto);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(UserDto dto)
+        public async Task<IActionResult> Add(SpeciesDto dto)
         {
-            var result = await _userApiService.Add(dto);
+            var result = await _speciesService.Add(dto);
             if (result.Success)
             {
-             
                 Alert("Ekleme işlemi başarılı.");
                 return RedirectToAction("Index");
 
@@ -60,26 +56,26 @@ namespace Pati.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Update(int id)
         {
-            var result = await _userApiService.GetById(id);
+            var result = await _speciesService.GetById(id);
             if (result.Success)
             {
                 return View("AddOrUpdate", result.Data);
             }
             else
             {
-                ErrorAlert("Kullanıcı bulunamadı." + result.Message);
+                ErrorAlert("Pet bulunamadı." + result.Message);
                 return RedirectToAction("Index");
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(UserDto dto)
+        public async Task<IActionResult> Update(SpeciesDto dto)
         {
-            var result = await _userApiService.Update(dto);
+            var result = await _speciesService.Update(dto);
             if (result.Success)
             {
                 Alert("Güncelleme işlemi başarılı.");
-                return RedirectToAction("Update", dto.UserId);
+                return RedirectToAction("Update", dto.GenusId);
 
             }
             else
@@ -91,7 +87,7 @@ namespace Pati.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await _userApiService.Delete(id);
+            var result = await _speciesService.Delete(id);
             if (result.Success)
             {
                 Alert("Silme işlemi başarılı.");
@@ -103,5 +99,6 @@ namespace Pati.Web.Areas.Admin.Controllers
 
             return RedirectToAction("Index");
         }
+
     }
 }

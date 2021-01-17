@@ -50,7 +50,7 @@ namespace Pati.Web.Areas.Admin.Controllers
             }
             else
             {
-                Alert("Ekleme işlemi başarısız." + result.Message);
+                ErrorAlert("Ekleme işlemi başarısız." + result.Message);
                 return View("AddOrUpdate", dto);
             }
         }
@@ -64,7 +64,7 @@ namespace Pati.Web.Areas.Admin.Controllers
             }
             else
             {
-                Alert("Pet bulunamadı." + result.Message);
+                ErrorAlert("Pet bulunamadı." + result.Message);
                 return RedirectToAction("Index");
             }
         }
@@ -81,7 +81,7 @@ namespace Pati.Web.Areas.Admin.Controllers
             }
             else
             {
-                Alert("Güncelleme işlemi başarısız.: " + result.Message);
+                ErrorAlert("Güncelleme işlemi başarısız.: " + result.Message);
                 return View("AddOrUpdate", dto);
             }
         }
@@ -95,7 +95,7 @@ namespace Pati.Web.Areas.Admin.Controllers
             }
             else
             {
-                Alert("Silme işlemi başarısız." + result.Message);
+                ErrorAlert("Silme işlemi başarısız." + result.Message);
             }
 
             return RedirectToAction("Index");
