@@ -20,13 +20,11 @@ namespace Pati.Web.ApiServices.Concrete
 
         private readonly HttpClient _httpClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IGenusService _genusService;
-        public SpeciesManager(HttpClient httpClient, IHttpContextAccessor httpContextAccessor, IGenusService genusService)
+        public SpeciesManager(HttpClient httpClient, IHttpContextAccessor httpContextAccessor/*, IGenusService genusService*/)
         {
             _httpClient = httpClient;
             _httpClient.BaseAddress = new Uri(StaticVars.BaseAPIAdress + "");
             _httpContextAccessor = httpContextAccessor;
-            _genusService = genusService;
         }
 
         public async Task<IResult> Add(SpeciesDto dto)
@@ -122,7 +120,7 @@ namespace Pati.Web.ApiServices.Concrete
             if (response.IsSuccessStatusCode)
             {
                 var dto = JsonConvert.DeserializeObject<List<SpeciesDto>>(await response.Content.ReadAsStringAsync());
-                dto.ForEach(x => x.GenusName = _genusService.GetById(x.GenusId).Result.Data?.GenusName);
+        /*        dto.ForEach(x => x.GenusName = _genusService.GetById(x.GenusId).Result.Data?.GenusName);*/
                 return new DataResult<List<SpeciesDto>>(dto, true, response.StatusCode);
             }
             else
@@ -151,7 +149,7 @@ namespace Pati.Web.ApiServices.Concrete
             if (response.IsSuccessStatusCode)
             {
                 var dto = JsonConvert.DeserializeObject<List<SpeciesDto>>(await response.Content.ReadAsStringAsync());
-                dto.ForEach(x => x.GenusName = _genusService.GetById(x.GenusId).Result.Data?.GenusName);
+          /*      dto.ForEach(x => x.GenusName = _genusService.GetById(x.GenusId).Result.Data?.GenusName);*/
                 return new DataResult<List<SpeciesDto>>(dto, true, response.StatusCode);
             }
             else

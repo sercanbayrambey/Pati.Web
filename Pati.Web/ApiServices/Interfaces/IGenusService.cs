@@ -1,4 +1,5 @@
 ﻿using Pati.Web.Dtos;
+using Pati.Web.Models;
 using Pati.Web.Results;
 using System;
 using System.Collections.Generic;

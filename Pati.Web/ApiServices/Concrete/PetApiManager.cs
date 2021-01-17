@@ -167,13 +167,26 @@ namespace Pati.Web.ApiServices.Concrete
             }
         }
 
-        public async Task<IDataResult<List<PetDto>>> List(int currentPage = 1, bool getImages = true)
+        public async Task<IDataResult<List<PetDto>>> List(int currentPage = 1, bool getImages = true, PetListParameters petListParameters)
         {
 
             var query = new Dictionary<string, string>
             {
                 ["p"] = currentPage.ToString()
             };
+
+            if(petListParameters != null)
+            {
+                if (petListParameters.GenusId.HasValue)
+                {
+                    query.Add("genusId", petListParameters.GenusId.Value.ToString());
+                }
+
+                if (petListParameters.SpeciesId.HasValue)
+                {
+                    query.Add("speciesId", petListParameters.SpeciesId.Value.ToString());
+                }
+            }
 
             var response = await _httpClient.GetAsync(QueryHelpers.AddQueryString("getPets", query));
             if (response.IsSuccessStatusCode)

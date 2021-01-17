@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Pati.Web.ApiServices.Interfaces;
 using Pati.Web.Dtos;
+using Pati.Web.Models;
 using Pati.Web.Utilities;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Pati.Web.Areas.Admin.Controllers
             _petApiService = petApiService;
             _fileService = fileService;
         }
-        public async Task<IActionResult> Index(int p = 1)
+        public async Task<IActionResult> Index( int p = 1)
         {
             var response = await _petApiService.List(p,false);
             if (response.Success)

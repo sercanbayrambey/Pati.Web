@@ -1,4 +1,5 @@
 ﻿using Pati.Web.Dtos;
+using Pati.Web.Models;
 using Pati.Web.Results;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace Pati.Web.ApiServices.Interfaces
 {
     public interface IPetApiService
     {
-        Task<IDataResult<List<PetDto>>> List(int currentPage = 1, bool getImages = true);
+        Task<IDataResult<List<PetDto>>> List(int currentPage = 1, bool getImages = true, PetListParameters petListParameters);
         Task<IDataResult<PetDto>> GetById(int id);
         Task<IDataResult<string>> Add(PetDto dto);
         Task<IResult> AddImageToPet(int petId, string fileName);

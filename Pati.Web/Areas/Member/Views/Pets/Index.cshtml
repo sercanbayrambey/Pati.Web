@@ -2,6 +2,12 @@
 @using X.PagedList;
 @model IPagedList<PetDto>
 @{
+
+    List<GenusDto> Genusses = new List<GenusDto>();
+    if (ViewBag.Categories != null)
+    {
+        Genusses = ViewBag.Categories;
+    }
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -21,32 +27,27 @@
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <h4 class="mb-0">
-                     <i class="fa fa-filter"></i> Filtrele
+                        <i class="fa fa-filter"></i> Filtrele
                     </h4>
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush" id="myList">
-                        <li class="list-group-item">
-                            <h5> <a href="#" style="color:#212529;">Kedi</a> </h5>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">Siyam Kedisi</a> </li>
-                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">İran Kedisi</a> </li>
-                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">Ankara Kedisi</a> </li>
-                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">Van Kedisi</a> </li>
-                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">Scottish</a> </li>
-                            </ul>
-                        </li>
+                        @foreach (var item in Genusses)
+                        {
+                            <li class="list-group-item">
+                                <h5> <a href="?GenusId=@item.GenusId" style="color:#212529;">@item.GenusName</a> </h5>
+                                <ul class="list-group list-group-flush">
+                                    @foreach (var species in item.SpeciesDtos)
+                                    {
+                                        <li class="list-group-item"> <a href="?GenusId=@item.GenusId&SpeciesId=@species.SpeciesId" style="color: #bd2130;">@species.SpeciesName</a> </li>
 
-                        <li class="list-group-item">
-                            <h5> <a href="#" style="color:#212529;">Köpek</a> </h5>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">Kangal</a> </li>
-                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">Pitbull Terrier</a> </li>
-                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">Sibirya Kurdu</a> </li>
-                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">Pug</a> </li>
-                                <li class="list-group-item"> <a href="#" style="color: #bd2130;">Süs Köpeee</a> </li>
-                            </ul>
-                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+
+
+
                     </ul>
 
                 </div>
