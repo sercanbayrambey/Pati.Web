@@ -25,7 +25,7 @@
                     <div class="row">
 
                         <input type="hidden" value="@Model.PetId" asp-for="PetId" />
-                        <input type="hidden" value="1"  asp-for="ShelterId" />
+                        <input type="hidden" value="1" asp-for="ShelterId" />
 
                         <div class="col-sm-4">
                             <div class="form-group">
@@ -46,6 +46,24 @@
                                 <label>Cinsiyeti:</label>
                                 <select class="form-control form-control-bordered" asp-for="PetGender" asp-items="Html.GetEnumSelectList<Pati.Web.Enums.PetGender>()">
                                     <option selected="selected" value="">Please select</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Cins:</label>
+                                <select name="Genus" required class="form-control form-control-bordered genus-select">
+                                    <option value="0">Seçiniz</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Tür:</label>
+                                <select name="SpeciesId" required class="form-control form-control-bordered species-select">
+                                    <option value="0">Seçiniz</option>
                                 </select>
                             </div>
                         </div>
@@ -113,3 +131,4 @@
     </div>
 </div>
 
+<script src="~/admin/js/genusSpecies.js"></script>

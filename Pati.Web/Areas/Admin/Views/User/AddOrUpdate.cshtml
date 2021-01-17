@@ -18,7 +18,7 @@
         <h5 class="card-title">@title</h5>
     </div>
     <div class="card-body">
-        <form asp-action="@(isEdit ? "Update" : "Add")" asp-controller="User" method="post" enctype="multipart/form-data">
+        <form asp-action="@(isEdit ? "Update" : "Add")" asp-controller="User" method="post">
             <div class="row">
                 <div class="col-md-12">
                     <div asp-validation-summary="All" class="text-danger"></div>
@@ -26,7 +26,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>E-Posta:</label>
-                                <input type="email" class="form-control" asp-for="UserMail" required />
+                                <input type="email" class="form-control form-control-bordered" asp-for="UserMail" required />
                             </div>
                         </div>
 
@@ -34,14 +34,14 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Şifre:</label>
-                                <input type="password" class="form-control" asp-for="Password" required />
+                                <input type="password" class="form-control form-control-bordered" asp-for="Password" required />
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Şifre Tekrar:</label>
-                                <input type="password" class="form-control" asp-for="ConfirmPassword" required />
+                                <input type="password" class="form-control form-control-bordered" asp-for="ConfirmPassword" required />
                             </div>
                         </div>
 
@@ -49,21 +49,21 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Ad:</label>
-                                <input type="text" class="form-control" asp-for="UserFirstName" required />
+                                <input type="text" class="form-control form-control-bordered" asp-for="UserFirstName" required />
                             </div>
                         </div>
 
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Soyad:</label>
-                                <input type="text" class="form-control" asp-for="UserLastName" required />
+                                <input type="text" class="form-control form-control-bordered" asp-for="UserLastName" required />
                             </div>
                         </div>
 
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Telefon:</label>
-                                <input type="tel" class="form-control" asp-for="UserPhoneNumber" maxlength="11" required />
+                                <input type="tel" class="form-control form-control-bordered" asp-for="UserPhoneNumber" maxlength="11" required />
                             </div>
                         </div>
 
@@ -71,7 +71,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Şehir:</label>
-                                <select name="City" required class="form-control city-select">
+                                <select name="City" required class="form-control form-control-bordered city-select">
                                     <option value="0">Seçiniz</option>
                                 </select>
                             </div>
@@ -80,7 +80,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>İlçe:</label>
-                                <select name="CountyId" required class="form-control county-select">
+                                <select name="CountyId" required class="form-control form-control-bordered county-select">
                                     <option value="0">Seçiniz</option>
                                 </select>
                             </div>
@@ -90,7 +90,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Cinsiyet:</label>
-                                <select asp-for="UserSex" required class="form-control">
+                                <select asp-for="UserSex" required class="form-control form-control-bordered">
                                     <option value="0">Kadın</option>
                                     <option value="1">Erkek</option>
                                 </select>
@@ -101,7 +101,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Doğum Günü:</label>
-                                <input class="form-control" value="@(isEdit ?  Model.UserBirthDate.Date.ToString("yyyy-MM-dd") :  DateTime.Today.ToString("yyyy-MM-dd"))" type="date" required asp-for="UserBirthDate" />
+                                <input class="form-control form-control-bordered" value="@(isEdit ?  Model.UserBirthDate.Date.ToString("yyyy-MM-dd") :  DateTime.Today.ToString("yyyy-MM-dd"))" type="date" required asp-for="UserBirthDate" />
                             </div>
                         </div>
 

@@ -101,5 +101,19 @@ namespace Pati.Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> GetGenusses()
+        {
+            var response = await _genusService.List();
+            if (response.Success)
+            {
+                return Ok(response.Data);
+            }
+            else
+            {
+                return StatusCode((int)response.StatusCode);
+            }
+        }
+
     }
 }

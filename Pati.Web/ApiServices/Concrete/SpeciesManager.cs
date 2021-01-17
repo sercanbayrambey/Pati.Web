@@ -131,6 +131,35 @@ namespace Pati.Web.ApiServices.Concrete
             }
         }
 
+        public async Task<IDataResult<List<SpeciesDto>>> List(int genusId)
+        {
+            var token = _httpContextAccessor.HttpContext.Session.GetString("token");
+
+            if (string.IsNullOrEmpty(token))
+                return new DataResult<List<SpeciesDto>>(null, false, System.Net.HttpStatusCode.Unauthorized);
+
+
+            _httpClient.AddJwtTokenToHeader(token);
+
+            var query = new Dictionary<string, string>
+            {
+                ["id"] = genusId.ToString()
+            };
+
+
+            var response = await _httpClient.GetAsync(QueryHelpers.AddQueryString("species",query));
+            if (response.IsSuccessStatusCode)
+            {
+                var dto = JsonConvert.DeserializeObject<List<SpeciesDto>>(await response.Content.ReadAsStringAsync());
+                dto.ForEach(x => x.GenusName = _genusService.GetById(x.GenusId).Result.Data?.GenusName);
+                return new DataResult<List<SpeciesDto>>(dto, true, response.StatusCode);
+            }
+            else
+            {
+                return new DataResult<List<SpeciesDto>>(null, false, response.StatusCode);
+            }
+        }
+
         public async Task<IResult> Update(SpeciesDto dto)
         {
             if (dto.GenusId <= 0)

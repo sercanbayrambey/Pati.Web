@@ -112,5 +112,19 @@ namespace Pati.Web.Areas.Admin.Controllers
             ViewBag.Genusses = new SelectList(_genusService.List().Result.Data, "GenusId", "GenusName",speciesDto.GenusId);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> GetSpecies(int genusId)
+        {
+            var response = await _speciesService.List(genusId);
+            if (response.Success)
+            {
+                return Ok(response.Data);
+            }
+            else
+            {
+                return StatusCode((int)response.StatusCode);
+            }
+        }
+
     }
 }

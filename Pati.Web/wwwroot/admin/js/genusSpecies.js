@@ -1,47 +1,45 @@
 ﻿$(document).ready(function () {
-    if ($("form select.city-select").length && $("form select.county-select").length) {
-        GetCities();
+    if ($("form select.genus-select").length && $("form select.species-select").length) {
+        GetGenusses();
     }
 
 });
 
-function GetCities() {
-    $.post("/CityCounty/GetCities")
+function GetGenusses() {
+    $.post("/admin/Genus/GetGenusses")
         .done(function (response) {
-            FillTheCitySelect(response);
+            FillTheGenusSelect(response);
         });
 }
 
-function FillTheCitySelect(response) {
+function FillTheGenusSelect(response) {
     $.each(response, function (index, item) {
-        $('form select.city-select').append(`<option value="${item.cityId}"> 
-                                       ${item.cityName} 
+        $('form select.genus-select').append(`<option value="${item.genusId}"> 
+                                       ${item.genusName} 
                                   </option>`);
     });
 }
 
-$('form select.city-select').change(function () {
-    var selectedCityId = $(this).find("option:selected").val();
-    if (selectedCityId <= 0 || selectedCityId > 81)
-        return;
+$('form select.genus-select').change(function () {
+    var selectedGenusId = parseInt($(this).find("option:selected").val());
 
-    GetCounties(selectedCityId);
+    GetSpecies(selectedGenusId);
+});
 
-})
-
-function GetCounties(cityId) {
-    $.post("/CityCounty/GetCounties", { cityId: cityId })
+function GetSpecies(genusId) {
+    $.post("/admin/Species/GetSpecies", { genusId: genusId })
         .done(function (response) {
-            FillTheCountySelect(response);
+            console.log(response);
+            FillTheSpeciesSelect(response);
         });
 }
 
 
-function FillTheCountySelect(response) {
-    $('form select.county-select').find('option').remove().end().append('<option value="0">Seçiniz</option>');
+function FillTheSpeciesSelect(response) {
+    $('form select.species-select').find('option').remove().end().append('<option value="0">Seçiniz</option>');
     $.each(response, function (index, item) {
-        $('form select.county-select').append(`<option value="${item.countyId}"> 
-                                       ${item.countyName} 
+        $('form select.species-select').append(`<option value="${item.speciesId}"> 
+                                       ${item.speciesName} 
                                   </option>`);
     });
 }

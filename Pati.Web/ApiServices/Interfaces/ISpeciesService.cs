@@ -10,6 +10,7 @@ namespace Pati.Web.ApiServices.Interfaces
     public interface ISpeciesService
     {
         Task<IDataResult<List<SpeciesDto>>> List();
+        Task<IDataResult<List<SpeciesDto>>> List(int genusId);
         Task<IDataResult<SpeciesDto>> GetById(int id);
         Task<IResult> Add(SpeciesDto dto);
         Task<IResult> Update(SpeciesDto dto);
