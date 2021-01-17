@@ -31,7 +31,7 @@ namespace Pati.Web.Areas.Member.Controllers
             }
 
 
-            var response = await _petApiService.List(p);
+            var response = await _petApiService.List(null,p);
             if (response.Success)
             {
                 var dataCount = await _petApiService.GetPetCount();

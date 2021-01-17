@@ -25,7 +25,7 @@ namespace Pati.Web.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index( int p = 1)
         {
-            var response = await _petApiService.List(p,false);
+            var response = await _petApiService.List(null,p,false);
             if (response.Success)
             {
                 var dataCount = await _petApiService.GetPetCount();

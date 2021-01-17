@@ -186,6 +186,11 @@ namespace Pati.Web.ApiServices.Concrete
                 {
                     query.Add("speciesId", petListParameters.SpeciesId.Value.ToString());
                 }
+
+                if (string.IsNullOrWhiteSpace(petListParameters.SearchTerm))
+                {
+                    query.Add("searchTerm", petListParameters.SpeciesId.Value.ToString());
+                }
             }
 
             var response = await _httpClient.GetAsync(QueryHelpers.AddQueryString("getPets", query));
