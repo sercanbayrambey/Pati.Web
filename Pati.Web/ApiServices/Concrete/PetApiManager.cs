@@ -20,12 +20,14 @@ namespace Pati.Web.ApiServices.Concrete
     {
         private readonly HttpClient _httpClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IShelterApiService _shelterApiService;
 
-        public PetApiManager(HttpClient httpClient, IHttpContextAccessor httpContextAccessor)
+        public PetApiManager(HttpClient httpClient, IHttpContextAccessor httpContextAccessor, IShelterApiService shelterApiService)
         {
             _httpClient = httpClient;
             _httpClient.BaseAddress = new Uri(StaticVars.BaseAPIAdress + "pet/");
             _httpContextAccessor = httpContextAccessor;
+            _shelterApiService = shelterApiService;
         }
 
         public async Task<IDataResult<string>> Add(PetDto dto)
@@ -199,6 +201,8 @@ namespace Pati.Web.ApiServices.Concrete
                 var dto = JsonConvert.DeserializeObject<List<PetDto>>(await response.Content.ReadAsStringAsync());
                 if(getImages)
                     dto.ForEach(x => x.Images = GetPetImages(x.PetId).Result);
+
+                dto.ForEach(x => x.ShelterName = _shelterApiService.GetById(x.ShelterId.Value).Result.Data.ShelterName);
                 return new DataResult<List<PetDto>>(dto, true, response.StatusCode);
             }
             else

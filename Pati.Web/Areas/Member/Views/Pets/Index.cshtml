@@ -8,7 +8,7 @@
     {
         Genusses = ViewBag.Categories;
     }
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Evcil Hayvanlar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -75,14 +75,16 @@
                 <div class="col-sm-4 mb-4 pet-container">
                     <div class="card shadow-lg h-100">
                         <img src="@item.Images.FirstOrDefault()" class="card-img-top" alt="...">
+                     
                         <div class="card-body">
-                            <h5 class="card-title">@item.PetName</h5>
+                            <h5 class="card-title">@item.PetName   <span class="text-muted float-right" style="font-size:small">(@item.SpeciesName)</span></h5>
                             <p class="card-text">@item.PetAdditionInfo</p>
                         </div>
 
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item font-weight-bold">Cinsiyet: @item.PetGender.GetDisplayName()</li>
-                            <li class="list-group-item font-weight-bold">Yaş: @(Convert.ToInt32(DateTime.Now.Subtract(item.PetBirthDate).Days / (365.25 / 12)))</li>
+                            <li class="list-group-item font-weight-bold">Yaş: @(Convert.ToInt32(DateTime.Now.Subtract(item.PetBirthDate).Days / (365.25 / 12))) Aylık</li>
+                            <li class="list-group-item font-weight-bold">Barınak: @item.ShelterName</li>
                             <a asp-action="Details" asp-route-id="@item.PetId" class="btn btn-danger btn-block">Detaylar</a>
                         </ul>
                     </div>

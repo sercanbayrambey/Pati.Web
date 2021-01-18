@@ -22,6 +22,10 @@ namespace Pati.Web.Dtos
         public List<string> Images { get; set; }
         public int CountyId { get; set; }
         public int GenusId { get; set; }
+        public string SpeciesName { get; set; }
+        public string ShelterName { get; set; }
+
+
 
 
 

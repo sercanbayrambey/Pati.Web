@@ -1,9 +1,13 @@
-﻿$(document).ready(function () {
+﻿
+
+$(document).ready(function () {
     if ($("form select.genus-select").length && $("form select.species-select").length) {
         GetGenusses();
     }
 
 });
+
+let isDefaultValuesFilled = false;
 
 function GetGenusses() {
     $.post("/admin/Genus/GetGenusses")
@@ -18,6 +22,11 @@ function FillTheGenusSelect(response) {
                                        ${item.genusName} 
                                   </option>`);
     });
+
+    if ($(".pet-current-species").length && $(".pet-current-genus").length) {
+        $(".genus-select").val($(".pet-current-genus").val());
+        GetSpecies($(".pet-current-genus").val())
+    }
 }
 
 $('form select.genus-select').change(function () {
@@ -42,5 +51,11 @@ function FillTheSpeciesSelect(response) {
                                        ${item.speciesName} 
                                   </option>`);
     });
+
+    if ($(".pet-current-species").length && $(".pet-current-genus").length && !isDefaultValuesFilled) {
+        $(".species-select").val($(".pet-current-species").val());
+        isDefaultValuesFilled = true;
+    }
+
 }
 

@@ -1,11 +1,17 @@
 ﻿$(document).ready(function () {
+
     if ($("form select.city-select").length && $("form select.county-select").length) {
         GetCities();
     }
 
+
+
 });
 
+let isDefaultValuesFilled = false;
+
 function GetCities() {
+    console.log("?");
     $.post("/CityCounty/GetCities")
         .done(function (response) {
             FillTheCitySelect(response);
@@ -17,7 +23,12 @@ function FillTheCitySelect(response) {
         $('form select.city-select').append(`<option value="${item.cityId}"> 
                                        ${item.cityName} 
                                   </option>`);
+      
     });
+    if ($(".current-city").length && $(".current-county").length) {
+        $(".city-select").val($(".current-city").val());
+        GetCounties($(".current-city").val());
+    }
 }
 
 $('form select.city-select').change(function () {
@@ -34,7 +45,7 @@ function GetCounties(cityId) {
         .done(function (response) {
             FillTheCountySelect(response);
         });
-}
+}   
 
 
 function FillTheCountySelect(response) {
@@ -43,5 +54,10 @@ function FillTheCountySelect(response) {
         $('form select.county-select').append(`<option value="${item.countyId}"> 
                                        ${item.countyName} 
                                   </option>`);
+  
     });
+    if ($(".current-city").length && $(".current-county").length && !isDefaultValuesFilled) {
+        $(".county-select").val($(".current-county").val());
+        isDefaultValuesFilled = true;
+    }
 }
